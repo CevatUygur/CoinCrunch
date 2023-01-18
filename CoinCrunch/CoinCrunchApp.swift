@@ -11,7 +11,10 @@ import SwiftUI
 struct CoinCrunchApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                HomeView()
+                    .navigationBarHidden(true)
+            }
         }
     }
 }
