@@ -19,6 +19,7 @@
 		CFF88A7F2978CB62009384CE /* CoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88A7E2978CB62009384CE /* CoinRowView.swift */; };
 		CFF88A812978CBDB009384CE /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88A802978CBDB009384CE /* PreviewProvider.swift */; };
 		CFF88A832978D116009384CE /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88A822978D116009384CE /* Double.swift */; };
+		CFF88A8529793FC4009384CE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88A8429793FC4009384CE /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		CFF88A7E2978CB62009384CE /* CoinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowView.swift; sourceTree = "<group>"; };
 		CFF88A802978CBDB009384CE /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		CFF88A822978D116009384CE /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		CFF88A8429793FC4009384CE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 		CFF88A712978AC09009384CE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				CFF88A8429793FC4009384CE /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFF88A7F2978CB62009384CE /* CoinRowView.swift in Sources */,
+				CFF88A8529793FC4009384CE /* HomeViewModel.swift in Sources */,
 				CFA68B8B2978A27400BA24D2 /* ContentView.swift in Sources */,
 				CFF88A732978AC20009384CE /* HomeView.swift in Sources */,
 				CFA68B892978A27400BA24D2 /* CoinCrunchApp.swift in Sources */,
