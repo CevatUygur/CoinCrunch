@@ -28,6 +28,9 @@
 		CFF88A94297C40F5009384CE /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88A93297C40F5009384CE /* LocalFileManager.swift */; };
 		CFF88A96297C4FBC009384CE /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88A95297C4FBC009384CE /* SearchBarView.swift */; };
 		CFF88A98297C54FC009384CE /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88A97297C54FC009384CE /* UIApplication.swift */; };
+		CFF88A9A297C5FD2009384CE /* StatisticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88A99297C5FD2009384CE /* StatisticModel.swift */; };
+		CFF88A9C297C6145009384CE /* StatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88A9B297C6145009384CE /* StatisticView.swift */; };
+		CFF88A9E297C64FA009384CE /* HomeStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88A9D297C64FA009384CE /* HomeStatsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +56,9 @@
 		CFF88A93297C40F5009384CE /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
 		CFF88A95297C4FBC009384CE /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		CFF88A97297C54FC009384CE /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		CFF88A99297C5FD2009384CE /* StatisticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticModel.swift; sourceTree = "<group>"; };
+		CFF88A9B297C6145009384CE /* StatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticView.swift; sourceTree = "<group>"; };
+		CFF88A9D297C64FA009384CE /* HomeStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,7 @@
 			children = (
 				CFF88A742978AD1E009384CE /* Components */,
 				CFF88A95297C4FBC009384CE /* SearchBarView.swift */,
+				CFF88A9B297C6145009384CE /* StatisticView.swift */,
 				CFF88A6F2978ABE9009384CE /* Home */,
 			);
 			path = Core;
@@ -140,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				CFF88A722978AC20009384CE /* HomeView.swift */,
+				CFF88A9D297C64FA009384CE /* HomeStatsView.swift */,
 				CFF88A7E2978CB62009384CE /* CoinRowView.swift */,
 			);
 			path = Views;
@@ -175,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				CFF88A7B2978BE79009384CE /* CoinModel.swift */,
+				CFF88A99297C5FD2009384CE /* StatisticModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -276,12 +285,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFF88A9A297C5FD2009384CE /* StatisticModel.swift in Sources */,
 				CFF88A88297951B2009384CE /* CoinDataService.swift in Sources */,
 				CFF88A7F2978CB62009384CE /* CoinRowView.swift in Sources */,
 				CFF88A8529793FC4009384CE /* HomeViewModel.swift in Sources */,
 				CFA68B8B2978A27400BA24D2 /* ContentView.swift in Sources */,
 				CFF88A94297C40F5009384CE /* LocalFileManager.swift in Sources */,
 				CFF88A732978AC20009384CE /* HomeView.swift in Sources */,
+				CFF88A9C297C6145009384CE /* StatisticView.swift in Sources */,
 				CFF88A8E297979A8009384CE /* CoinImageView.swift in Sources */,
 				CFA68B892978A27400BA24D2 /* CoinCrunchApp.swift in Sources */,
 				CFF88A98297C54FC009384CE /* UIApplication.swift in Sources */,
@@ -289,6 +300,7 @@
 				CFF88A6D2978A5E5009384CE /* Color.swift in Sources */,
 				CFF88A96297C4FBC009384CE /* SearchBarView.swift in Sources */,
 				CFF88A8B2979679A009384CE /* NetworkingManager.swift in Sources */,
+				CFF88A9E297C64FA009384CE /* HomeStatsView.swift in Sources */,
 				CFF88A792978B1C9009384CE /* CircleButtonAnimationView.swift in Sources */,
 				CFF88A92297C36A6009384CE /* CoinImageViewModel.swift in Sources */,
 				CFF88A812978CBDB009384CE /* PreviewProvider.swift in Sources */,
