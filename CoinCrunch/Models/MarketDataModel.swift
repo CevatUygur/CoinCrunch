@@ -200,4 +200,5 @@ struct MarketDataModel: Codable {
         }
         return ""
     }
+    
 }
