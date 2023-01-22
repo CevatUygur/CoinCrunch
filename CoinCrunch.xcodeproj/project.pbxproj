@@ -36,6 +36,8 @@
 		CFF88AA4297C75A4009384CE /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88AA3297C75A4009384CE /* PortfolioView.swift */; };
 		CFF88AA6297C77F6009384CE /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88AA5297C77F6009384CE /* XMarkButton.swift */; };
 		CFF88AA8297C9CF5009384CE /* CoinLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88AA7297C9CF5009384CE /* CoinLogoView.swift */; };
+		CFF88AAC297D4390009384CE /* PortfolioContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CFF88AAA297D4390009384CE /* PortfolioContainer.xcdatamodeld */; };
+		CFF88AAE297D4450009384CE /* PortfolioDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88AAD297D4450009384CE /* PortfolioDataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		CFF88AA5297C77F6009384CE /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
 		CFF88AA7297C9CF5009384CE /* CoinLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinLogoView.swift; sourceTree = "<group>"; };
 		CFF88AA9297CB93D009384CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CFF88AAB297D4390009384CE /* PortfolioContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PortfolioContainer.xcdatamodel; sourceTree = "<group>"; };
+		CFF88AAD297D4450009384CE /* PortfolioDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +203,7 @@
 				CFF88A7B2978BE79009384CE /* CoinModel.swift */,
 				CFF88A99297C5FD2009384CE /* StatisticModel.swift */,
 				CFF88A9F297C6953009384CE /* MarketDataModel.swift */,
+				CFF88AAA297D4390009384CE /* PortfolioContainer.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 				CFF88A87297951B2009384CE /* CoinDataService.swift */,
 				CFF88A8F297C34DE009384CE /* CoinImageService.swift */,
 				CFF88AA1297C6D0B009384CE /* MarketDataService.swift */,
+				CFF88AAD297D4450009384CE /* PortfolioDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -302,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFF88AAC297D4390009384CE /* PortfolioContainer.xcdatamodeld in Sources */,
 				CFF88A9A297C5FD2009384CE /* StatisticModel.swift in Sources */,
 				CFF88A88297951B2009384CE /* CoinDataService.swift in Sources */,
 				CFF88A7F2978CB62009384CE /* CoinRowView.swift in Sources */,
@@ -329,6 +336,7 @@
 				CFF88A832978D116009384CE /* Double.swift in Sources */,
 				CFF88A90297C34DE009384CE /* CoinImageService.swift in Sources */,
 				CFF88A7C2978BE79009384CE /* CoinModel.swift in Sources */,
+				CFF88AAE297D4450009384CE /* PortfolioDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +473,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -479,7 +488,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -499,6 +508,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -513,7 +523,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -539,6 +549,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CFF88AAA297D4390009384CE /* PortfolioContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CFF88AAB297D4390009384CE /* PortfolioContainer.xcdatamodel */,
+			);
+			currentVersion = CFF88AAB297D4390009384CE /* PortfolioContainer.xcdatamodel */;
+			path = PortfolioContainer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CFA68B7D2978A27400BA24D2 /* Project object */;
 }
