@@ -16,8 +16,8 @@ struct PortfolioView: View {
     @State private var showCheckmark: Bool = false
     
     private var showSaveButton: Bool {
-        guard let quantity = Double(quantityText) else { return false}
-        if selectedCoin != nil && selectedCoin?.currentHoldings != Double(quantityText) && quantity != 0 {
+        guard let quantityDouble = Double(quantityText.replacingOccurrences(of: ",", with: ".")) else { return false}
+        if selectedCoin != nil && selectedCoin?.currentHoldings != quantityDouble && quantityDouble != 0 {
             return true
         }
         return false
@@ -83,11 +83,11 @@ extension PortfolioView {
     }
     
     private func getCurrentValue() -> Double {
-        if let quantity = Double(quantityText) {
-            return quantity * (selectedCoin?.currentPrice ?? 0)
-            
-        }
-        return 0
+        
+        guard let quantityDouble = Double(quantityText.replacingOccurrences(of: ",", with: ".")) else { return 0 }
+        
+        return quantityDouble * (selectedCoin?.currentPrice ?? 0)
+        
     }
     
     private var portfolioInputSection: some View {
