@@ -35,10 +35,15 @@ struct ChartView: View {
             chartView
                 .frame(height: 200)
                 .background(chartBackground)
-                .overlay(chartYAxis.padding(.horizontal, 4), alignment: .leading)
+                .overlay(chartYAxis.padding(.leading, -52), alignment: .leading)
+                .padding(.leading, 30)
+                .padding(.trailing, 8)
             chartDateLabels
                 .padding(.horizontal, 4)
+                .padding(.leading, 22)
+                .padding(.trailing, 4)
         }
+        .padding(.leading, 30)
         .font(.caption)
         .foregroundColor(Color.theme.secondaryText)
         .onAppear {
@@ -78,7 +83,7 @@ extension ChartView {
             }
             .trim(from: 0, to: percentage)
             .stroke(lineColor, style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
-            .shadow(color: lineColor, radius: 2, x: 0.0, y: 2)
+            .shadow(color: lineColor.opacity(0.5), radius: 5, x: 0.0, y: 2)
         }
     }
     
@@ -94,11 +99,20 @@ extension ChartView {
     
     private var chartYAxis: some View {
         VStack {
-            Text(maxY.formattedWithAbbreviations())
+            HStack(spacing: 1) {
+                Text("$")
+                Text(maxY.formattedWithAbbreviations())
+            }
             Spacer()
-            Text(((maxY - minY) / 2).formattedWithAbbreviations())
+            HStack(spacing: 1) {
+                Text("$")
+                Text(((maxY + minY) / 2).formattedWithAbbreviations())
+            }
             Spacer()
-            Text(minY.formattedWithAbbreviations())
+            HStack(spacing: 1) {
+                Text("$")
+                Text(minY.formattedWithAbbreviations())
+            }
         }
     }
     
