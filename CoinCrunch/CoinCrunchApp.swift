@@ -22,6 +22,7 @@ struct CoinCrunchApp: App {
             NavigationView {
                 HomeView()
                     .navigationBarHidden(true)
+                    .navigationBarTitleDisplayMode(.large)
             }
             .environmentObject(vm)
         }

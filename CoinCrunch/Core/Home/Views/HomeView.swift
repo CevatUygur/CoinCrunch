@@ -49,6 +49,7 @@ struct HomeView: View {
         .background(
             NavigationLink(isActive: $showDetailView, destination: {
                 DetailLoadingView(coin: $selectedCoin)
+                    .navigationBarTitleDisplayMode(.large)
             }, label: { EmptyView() })
         )
     }
