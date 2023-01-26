@@ -9,19 +9,23 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var vm: HomeViewModel
     let defaultURL = URL(string: "https://www.google.com")!
     
     var body: some View {
         NavigationView {
             List {
-                Text("Hi")
+                Section(header: Text("general")) {
+                    Text("About")
+                }
                 
             }
             .listStyle(GroupedListStyle())
             .navigationTitle("Settings")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    XMarkButton()
+                    XMarkButton(dismiss: _dismiss)
                 }
             }
         }

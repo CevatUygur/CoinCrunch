@@ -87,7 +87,7 @@ extension HomeView {
                 .foregroundColor(Color.theme.accent)
                 .animation(.none)
             Spacer()
-            CircleButtonView(iconName: showPortfolio ? "plus" : "info")
+            CircleButtonView(iconName: showPortfolio ? "plus" : "gearshape.fill")
                 .animation(.none)
                 .onTapGesture {
                     if showPortfolio {
