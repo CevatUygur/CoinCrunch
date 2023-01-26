@@ -48,8 +48,7 @@ struct DetailView: View {
                     additionalTitle
                     Divider()
                     additionalGrid
-                    websiteSecion
-                    
+                    websiteSection
                 }
                 .padding()
             }
@@ -140,7 +139,7 @@ extension DetailView {
         }
     }
     
-    private var websiteSecion: some View {
+    private var websiteSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             if let websiteString = vm.websiteURL,
                let url = URL(string: websiteString) {
