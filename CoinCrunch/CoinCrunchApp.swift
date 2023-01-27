@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct CoinCrunchApp: App {
     
+    @StateObject var csManager = ColorSchemeManager()
     @StateObject private var vm = HomeViewModel()
     
     init() {
@@ -25,6 +26,10 @@ struct CoinCrunchApp: App {
                     .navigationBarTitleDisplayMode(.large)
             }
             .environmentObject(vm)
+            .environmentObject(csManager)
+            .onAppear {
+                csManager.applyColorScheme()
+            }
         }
     }
 }

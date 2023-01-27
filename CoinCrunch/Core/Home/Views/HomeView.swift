@@ -28,6 +28,8 @@ struct HomeView: View {
                         .environmentObject(vm)
                 })
             
+            
+            
             // content layer
             VStack {
                 homeHeader
