@@ -19,6 +19,7 @@ struct CircleButtonView: View {
             .background(
                 Circle()
                     .foregroundColor(Color.theme.background)
+                    .padding(1)
             )
             .shadow(color: Color.theme.accent.opacity(0.25), radius: 10, x: 0, y: 0)
             .padding()
@@ -28,7 +29,7 @@ struct CircleButtonView: View {
 struct CircleButtonView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CircleButtonView(iconName: "info")
+            CircleButtonView(iconName: "line.3.horizontal")
                 .previewLayout(.sizeThatFits)
             
             CircleButtonView(iconName: "plus")

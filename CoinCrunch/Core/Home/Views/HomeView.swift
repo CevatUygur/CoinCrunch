@@ -10,53 +10,29 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject private var vm: HomeViewModel
-    @State private var showPortfolio: Bool = false // <- animate right
-    @State private var showPortfolioView: Bool = false // <- new sheet
+
     @State private var showSettingsView: Bool = false // <- new sheet
     @State private var selectedCoin: CoinModel? = nil
     @State private var showDetailView: Bool = false
     
     var body: some View {
-        ZStack {
-            // background layer
-            Color.theme.background
-                .ignoresSafeArea()
-                .sheet(isPresented: $showPortfolioView, onDismiss: {
-                    
-                }, content: {
-                    PortfolioView()
-                        .environmentObject(vm)
-                })
-            
-            
-            
-            // content layer
-            VStack {
-                homeHeader
-                HomeStatsView(showPortfolio: $showPortfolio)
-                SearchBarView(searchText: $vm.searchText)
-                columnTitles
-                
-                if !showPortfolio {
-                    allCoinsList
-                        .transition(.move(edge: .leading))
-                } else {
-                    portfolioCoinsList
-                        .transition(.move(edge: .trailing))
+        TabView {
+            homeBodyView
+                .tabItem {
+                    Label("Live Prices", systemImage: "chart.line.uptrend.xyaxis")
                 }
-                
-                Spacer(minLength: 0)
-            }
-            .sheet(isPresented: $showSettingsView) {
-                SettingsView()
-            }
+            
+            PortfolioView()
+                .tabItem {
+                    Label("Portfolio", systemImage: "chart.pie")
+                }
+            
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person")
+                }
         }
-        .background(
-            NavigationLink(isActive: $showDetailView, destination: {
-                DetailLoadingView(coin: $selectedCoin)
-                    .navigationBarTitleDisplayMode(.large)
-            }, label: { EmptyView() })
-        )
+        .accentColor(Color.theme.accent)
     }
 }
 
@@ -72,35 +48,43 @@ struct HomeView_Previews: PreviewProvider {
 
 extension HomeView {
     
+    private var homeBodyView: some View {
+        ZStack {
+            VStack {
+                homeHeader
+                HomeStatsView(showPortfolio: false)
+                SearchBarView(searchText: $vm.searchText)
+                columnTitles
+                
+                allCoinsList
+                    .transition(.move(edge: .leading))
+                
+                Spacer(minLength: 0)
+            }
+            .sheet(isPresented: $showSettingsView) {
+                SettingsView()
+            }
+        }
+        .background(
+            NavigationLink(isActive: $showDetailView, destination: {
+                DetailLoadingView(coin: $selectedCoin)
+                    .navigationBarTitleDisplayMode(.large)
+            }, label: { EmptyView() })
+        )
+    }
+    
     private var homeHeader: some View {
         HStack {
-            CircleButtonView(iconName: "chevron.right")
-                .rotationEffect(Angle(degrees: showPortfolio ? 180 : 0))
-                .onTapGesture {
-                    UIApplication.shared.endEditing()
-                    withAnimation(.spring()) {
-                        showPortfolio.toggle()
-                    }
-                }
-            Spacer()
-            Text(showPortfolio ? "Portfolio" : "Live Prices")
-                .font(.headline)
+            Text("Live Prices")
+                .font(.title)
                 .fontWeight(.heavy)
                 .foregroundColor(Color.theme.accent)
                 .animation(.none)
             Spacer()
-            CircleButtonView(iconName: showPortfolio ? "plus" : "gearshape.fill")
-                .animation(.none)
+            CircleButtonView(iconName: "line.3.horizontal")
                 .onTapGesture {
-                    if showPortfolio {
-                        showPortfolioView.toggle()
-                    } else {
-                        showSettingsView.toggle()
-                    }
+                    showSettingsView.toggle()
                 }
-                .background(
-                    CircleButtonAnimationView(animate: $showPortfolio)
-                )
         }
         .padding(.horizontal)
     }
@@ -109,22 +93,6 @@ extension HomeView {
         List {
             ForEach(vm.allCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: false)
-                    .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
-                    .onTapGesture {
-                        segue(coin: coin)
-                    }
-            }
-        }
-        .listStyle(PlainListStyle())
-        .refreshable {
-            vm.reloadData()
-        }
-    }
-    
-    private var portfolioCoinsList: some View {
-        List {
-            ForEach(vm.portfolioCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: true)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                     .onTapGesture {
                         segue(coin: coin)
@@ -152,20 +120,6 @@ extension HomeView {
             }
             
             Spacer()
-            
-            if showPortfolio {
-                HStack(spacing: 4) {
-                    Text("Holdings")
-                    Image(systemName: "chevron.down")
-                        .opacity((vm.sortOption == .holdings || vm.sortOption == .holdingsReversed) ? 1.0 : 0.0)
-                        .rotationEffect(Angle(degrees: vm.sortOption == .holdings ? 0 : 180))
-                }
-                .onTapGesture {
-                    withAnimation(.default) {
-                        vm.sortOption = vm.sortOption == .holdings ? .holdingsReversed : .holdings
-                    }
-                }
-            }
             
             HStack(spacing: 4) {
                 Text("Price")

@@ -11,7 +11,7 @@ struct HomeStatsView: View {
     
     @EnvironmentObject private var vm: HomeViewModel
     
-    @Binding var showPortfolio: Bool
+    var showPortfolio: Bool
     
     var body: some View {
         HStack {
@@ -26,7 +26,7 @@ struct HomeStatsView: View {
 
 struct HomeStatsView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeStatsView(showPortfolio: .constant(false))
+        HomeStatsView(showPortfolio: false)
             .environmentObject(dev.homeVM)
     }
 }

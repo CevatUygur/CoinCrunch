@@ -2,196 +2,148 @@
 //  PortfolioView.swift
 //  CoinCrunch
 //
-//  Created by CEVAT UYGUR on 21.01.2023.
+//  Created by CEVAT UYGUR on 28.01.2023.
 //
 
 import SwiftUI
 
 struct PortfolioView: View {
     
-    @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var vm: HomeViewModel
+    @State private var showPortfolioView: Bool = false // <- new sheet
     @State private var selectedCoin: CoinModel? = nil
-    @State private var quantityText: String = ""
-    @State private var showCheckmark: Bool = false
-    
-    private var showSaveButton: Bool {
-        guard let quantityDouble = Double(quantityText.replacingOccurrences(of: ",", with: ".")) else { return false}
-        
-        if selectedCoin != nil && selectedCoin?.currentHoldings != quantityDouble {
-            
-            if vm.portfolioCoins.first(where: { $0.id == selectedCoin?.id }) != nil {
-                return true
-            }
-            
-            if quantityDouble != 0 {
-                return true
-            } else {
-                return false
-            }
-        }
-        
-        return false
-    }
+    @State private var showDetailView: Bool = false
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    SearchBarView(searchText: $vm.searchText)
-                    coinLogoList
-                    
-                    if selectedCoin != nil {
-                        portfolioInputSection
-                    }
-                    
-                }
-            }
-            .navigationTitle("Edit Portfolio")
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    XMarkButton(dismiss: _dismiss)
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    trailingNavBarButtons
-                }
-            })
-            .onChange(of: vm.searchText) { value in
-                if value == "" {
-                    removeSelectedCoin()
-                }
-            }
-        }
+        portfolioBodyView
     }
 }
 
 struct PortfolioView_Previews: PreviewProvider {
     static var previews: some View {
-        PortfolioView()
-            .environmentObject(dev.homeVM)
+        NavigationView {
+            PortfolioView()
+                .navigationBarHidden(true)
+        }
+        .environmentObject(dev.homeVM)
     }
 }
 
 extension PortfolioView {
     
-    private var coinLogoList: some View {
-        ScrollView(.horizontal, showsIndicators: false, content: { LazyHStack(spacing: 10){
-            ForEach(vm.searchText.isEmpty ? vm.portfolioCoins : vm.allCoins) { coin in
-                    CoinLogoView(coin: coin)
-                        .frame(width: 75)
-                        .padding(4)
-                        .onTapGesture {
-                            withAnimation(.easeIn) {
-                                updateSelectedCoin(coin: coin)
-                            }
-                        }
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(selectedCoin?.id == coin.id ? Color.theme.green : Color.clear, lineWidth: 1)
-                        )
-                        .opacity(selectedCoin?.id == coin.id ? 1.0 : 0.7)
-                        .scaleEffect(x: selectedCoin?.id == coin.id ? 1.0 : 0.9, y: selectedCoin?.id == coin.id ? 1.0 : 0.9)
+    private var portfolioBodyView: some View {
+        ZStack {
+            // background layer
+            Color.theme.background
+                .ignoresSafeArea()
+                .sheet(isPresented: $showPortfolioView) {
+                    EditPortfolioView()
+                        .environmentObject(vm)
+                }
+            
+            // content layer
+            VStack {
+                profileHeader
+                HomeStatsView(showPortfolio: true)
+                SearchBarView(searchText: $vm.searchText)
+                columnTitles
+                
+                portfolioCoinsList
+                    .transition(.move(edge: .trailing))
+                
+                Spacer(minLength: 0)
+            }
+
+        }
+        .background(
+            NavigationLink(isActive: $showDetailView, destination: {
+                DetailLoadingView(coin: $selectedCoin)
+                    .navigationBarTitleDisplayMode(.large)
+            }, label: { EmptyView() })
+        )
+    }
+    
+    private var profileHeader: some View {
+        HStack {
+            Text("Portfolio")
+                .font(.title)
+                .fontWeight(.heavy)
+                .foregroundColor(Color.theme.accent)
+            Spacer()
+            CircleButtonView(iconName: "plus")
+                .onTapGesture {
+                    showPortfolioView.toggle()
+                }
+        }
+        .padding(.horizontal)
+    }
+    
+    private var portfolioCoinsList: some View {
+        List {
+            ForEach(vm.portfolioCoins) { coin in
+                CoinRowView(coin: coin, showHoldingsColumn: true)
+                    .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                    .onTapGesture {
+                        segue(coin: coin)
+                    }
+            }
+        }
+        .listStyle(PlainListStyle())
+        .refreshable {
+            vm.reloadData()
+        }
+    }
+
+    private var columnTitles: some View {
+        HStack {
+            HStack(spacing: 4) {
+                Text("Coin")
+                Image(systemName: "chevron.down")
+                    .opacity((vm.sortOption == .rank || vm.sortOption == .rankReversed) ? 1.0 : 0.0)
+                    .rotationEffect(Angle(degrees: vm.sortOption == .rank ? 0 : 180))
+            }
+            .onTapGesture {
+                withAnimation(.default) {
+                    vm.sortOption = vm.sortOption == .rank ? .rankReversed : .rank
                 }
             }
-            .frame(height: 120)
-            .padding(.leading)
-        })
+
+            Spacer()
+
+            HStack(spacing: 4) {
+                Text("Holdings")
+                Image(systemName: "chevron.down")
+                    .opacity((vm.sortOption == .holdings || vm.sortOption == .holdingsReversed) ? 1.0 : 0.0)
+                    .rotationEffect(Angle(degrees: vm.sortOption == .holdings ? 0 : 180))
+            }
+            .onTapGesture {
+                withAnimation(.default) {
+                    vm.sortOption = vm.sortOption == .holdings ? .holdingsReversed : .holdings
+                }
+            }
+
+            HStack(spacing: 4) {
+                Text("Price")
+                Image(systemName: "chevron.down")
+                    .opacity((vm.sortOption == .price || vm.sortOption == .priceReversed) ? 1.0 : 0.0)
+                    .rotationEffect(Angle(degrees: vm.sortOption == .price ? 0 : 180))
+            }
+            .frame(width: UIScreen.main.bounds.width / 3.2, alignment: .trailing)
+            .onTapGesture {
+                withAnimation(.default) {
+                    vm.sortOption = vm.sortOption == .price ? .priceReversed : .price
+                }
+            }
+
+        }
+        .font(.caption)
+        .foregroundColor(Color.theme.secondaryText)
+        .padding(.horizontal)
     }
     
-    private func updateSelectedCoin(coin: CoinModel) {
+    private func segue(coin: CoinModel) {
         selectedCoin = coin
-        
-        if let portfolioCoin = vm.portfolioCoins.first(where: { $0.id == coin.id }),
-           let amount = portfolioCoin.currentHoldings {
-            quantityText = "\(amount)"
-        } else {
-            quantityText = ""
-        }
-        
-    }
-    
-    private func getCurrentValue() -> Double {
-        
-        guard let quantityDouble = Double(quantityText.replacingOccurrences(of: ",", with: ".")) else { return 0 }
-        
-        return quantityDouble * (selectedCoin?.currentPrice ?? 0)
-        
-    }
-    
-    private var portfolioInputSection: some View {
-        VStack(spacing: 20) {
-            HStack {
-                Text("Current price of \(selectedCoin?.symbol.uppercased() ?? ""):")
-                Spacer()
-                Text(selectedCoin?.currentPrice.asCurrencyWith6Decimals() ?? "")
-            }
-            Divider()
-            HStack {
-                Text("Amount in portfolio:")
-                Spacer()
-                TextField("Ex: 1.6", text: $quantityText)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.decimalPad)
-            }
-            Divider()
-            HStack {
-                Text("Current Value:")
-                Spacer()
-                Text(getCurrentValue().asCurrencyWith2Decimals())
-            }
-        }
-        .animation(.none)
-        .padding()
-        .font(.headline)
-    }
-    
-    private var trailingNavBarButtons: some View {
-        HStack(spacing: 10) {
-            Image(systemName: "checkmark")
-                .opacity(showCheckmark ? 1.0 : 0.0)
-            Button {
-                saveButtonTapped()
-            } label: {
-                Text("Save".uppercased())
-            }
-        }
-        .disabled(!showSaveButton)
-        .font(.headline)
-    }
-    
-    private func saveButtonTapped() {
-        
-        guard let coin = selectedCoin else { return }
-        guard let quantityDouble = Double(quantityText.replacingOccurrences(of: ",", with: ".")) else { return }
-        
-        // save to portfolio
-        
-        vm.updatePortfolio(coin: coin, amount: quantityDouble)
-        
-        // show checkmark
-        withAnimation(.easeIn) {
-            showCheckmark = true
-        }
-        
-        // remove selectedCoin
-        removeSelectedCoin()
-        
-        
-        // hide keyboard
-        UIApplication.shared.endEditing()
-        
-        // hide checkmark
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            withAnimation(.easeOut) {
-                showCheckmark = false
-            }
-        }
-    }
-    
-    private func removeSelectedCoin() {
-        selectedCoin = nil
-        vm.searchText = ""
-        quantityText = ""
+        showDetailView.toggle()
     }
     
 }

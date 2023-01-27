@@ -54,7 +54,7 @@ extension SettingsView {
                     .tag(ColorScheme.light)
                 
             }
-            .pickerStyle(.menu)
+            .pickerStyle(.automatic)
         }
     }
 }
