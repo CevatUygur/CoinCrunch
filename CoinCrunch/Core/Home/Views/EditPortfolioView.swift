@@ -141,7 +141,6 @@ extension EditPortfolioView {
                 Text(getCurrentValue().asCurrencyWith2Decimals())
             }
         }
-        .animation(.none)
         .padding()
         .font(.headline)
     }

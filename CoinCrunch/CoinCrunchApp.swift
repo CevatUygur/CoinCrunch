@@ -23,14 +23,16 @@ struct CoinCrunchApp: App {
         WindowGroup {
             NavigationView {
                 HomeView()
-                    .navigationBarHidden(true)
-                    .navigationBarTitleDisplayMode(.large)
+                    //.navigationBarHidden(true)
+                    //.navigationBarTitleDisplayMode(.inline)
             }
+            .accentColor(Color.theme.accent)
             .environmentObject(vm)
             .environmentObject(csManager)
             .onAppear {
                 csManager.applyColorScheme()
             }
+            
         }
     }
 }

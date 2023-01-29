@@ -16,6 +16,12 @@
 		CFA68B892978A27400BA24D2 /* CoinCrunchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA68B882978A27400BA24D2 /* CoinCrunchApp.swift */; };
 		CFA68B8B2978A27400BA24D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA68B8A2978A27400BA24D2 /* ContentView.swift */; };
 		CFA68B902978A27600BA24D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFA68B8F2978A27600BA24D2 /* Preview Assets.xcassets */; };
+		CFDC0739298585F4009E58E3 /* like.json in Resources */ = {isa = PBXBuildFile; fileRef = CFDC0738298585F4009E58E3 /* like.json */; };
+		CFDC073B298586B3009E58E3 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC073A298586B3009E58E3 /* LottieView.swift */; };
+		CFDC073E298590B1009E58E3 /* home.json in Resources */ = {isa = PBXBuildFile; fileRef = CFDC073D298590B1009E58E3 /* home.json */; };
+		CFDC0740298590D4009E58E3 /* chat.json in Resources */ = {isa = PBXBuildFile; fileRef = CFDC073F298590D4009E58E3 /* chat.json */; };
+		CFDC0742298590ED009E58E3 /* profile.json in Resources */ = {isa = PBXBuildFile; fileRef = CFDC0741298590ED009E58E3 /* profile.json */; };
+		CFDC074429859103009E58E3 /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = CFDC074329859102009E58E3 /* settings.json */; };
 		CFF44F67298464080042270A /* ColorSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F66298464080042270A /* ColorSchemeManager.swift */; };
 		CFF44F69298477DE0042270A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F68298477DE0042270A /* ProfileView.swift */; };
 		CFF44F6B29847EF20042270A /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F6A29847EF20042270A /* PortfolioView.swift */; };
@@ -49,9 +55,12 @@
 		CFF88AAE297D4450009384CE /* PortfolioDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88AAD297D4450009384CE /* PortfolioDataService.swift */; };
 		CFF88AB3297DD041009384CE /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88AB2297DD041009384CE /* DetailView.swift */; };
 		CFF88AB5297DDCD1009384CE /* CoinDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88AB4297DDCD1009384CE /* CoinDetailModel.swift */; };
+		E0E71C3F51A1D6DE604AAFD3 /* Pods_CoinCrunch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A4F9054E98B67F4FD9D42CC /* Pods_CoinCrunch.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F74A6D08F50D5697F1DB42A /* Pods-CoinCrunch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinCrunch.debug.xcconfig"; path = "Target Support Files/Pods-CoinCrunch/Pods-CoinCrunch.debug.xcconfig"; sourceTree = "<group>"; };
+		5A4F9054E98B67F4FD9D42CC /* Pods_CoinCrunch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoinCrunch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF1E3B52297DE23800E25730 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		CF1E3B54297DE4BC00E25730 /* CoinDetailDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailDataService.swift; sourceTree = "<group>"; };
 		CF1E3B56297DFEAA00E25730 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -62,6 +71,12 @@
 		CFA68B882978A27400BA24D2 /* CoinCrunchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCrunchApp.swift; sourceTree = "<group>"; };
 		CFA68B8A2978A27400BA24D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CFA68B8F2978A27600BA24D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CFDC0738298585F4009E58E3 /* like.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = like.json; sourceTree = "<group>"; };
+		CFDC073A298586B3009E58E3 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		CFDC073D298590B1009E58E3 /* home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = home.json; sourceTree = "<group>"; };
+		CFDC073F298590D4009E58E3 /* chat.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chat.json; sourceTree = "<group>"; };
+		CFDC0741298590ED009E58E3 /* profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profile.json; sourceTree = "<group>"; };
+		CFDC074329859102009E58E3 /* settings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings.json; sourceTree = "<group>"; };
 		CFF44F66298464080042270A /* ColorSchemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeManager.swift; sourceTree = "<group>"; };
 		CFF44F68298477DE0042270A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CFF44F6A29847EF20042270A /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
@@ -96,6 +111,7 @@
 		CFF88AAD297D4450009384CE /* PortfolioDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDataService.swift; sourceTree = "<group>"; };
 		CFF88AB2297DD041009384CE /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		CFF88AB4297DDCD1009384CE /* CoinDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailModel.swift; sourceTree = "<group>"; };
+		E58C04004DAEA1778E9A1C22 /* Pods-CoinCrunch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinCrunch.release.xcconfig"; path = "Target Support Files/Pods-CoinCrunch/Pods-CoinCrunch.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,12 +119,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0E71C3F51A1D6DE604AAFD3 /* Pods_CoinCrunch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0516152E693AF6410D3BEBC5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5A4F9054E98B67F4FD9D42CC /* Pods_CoinCrunch.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CF1E3B5C29831B6F00E25730 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +155,8 @@
 			children = (
 				CFA68B872978A27400BA24D2 /* CoinCrunch */,
 				CFA68B862978A27400BA24D2 /* Products */,
+				F9ED5D84D69F3708BF6EBFB8 /* Pods */,
+				0516152E693AF6410D3BEBC5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				CFF88AA9297CB93D009384CE /* Info.plist */,
+				CFDC073A298586B3009E58E3 /* LottieView.swift */,
 				CFA68B882978A27400BA24D2 /* CoinCrunchApp.swift */,
 				CFF88A892979675C009384CE /* Utilities */,
 				CFF88A6B2978A5CB009384CE /* Extensions */,
@@ -153,6 +181,7 @@
 				CFF88A6E2978ABD4009384CE /* Core */,
 				CFA68B8A2978A27400BA24D2 /* ContentView.swift */,
 				CFF88A692978A439009384CE /* Assets.xcassets */,
+				CFDC073C2985872F009E58E3 /* Lottie */,
 				CFA68B8E2978A27600BA24D2 /* Preview Content */,
 			);
 			path = CoinCrunch;
@@ -164,6 +193,18 @@
 				CFA68B8F2978A27600BA24D2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CFDC073C2985872F009E58E3 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				CFDC073D298590B1009E58E3 /* home.json */,
+				CFDC073F298590D4009E58E3 /* chat.json */,
+				CFDC0741298590ED009E58E3 /* profile.json */,
+				CFDC074329859102009E58E3 /* settings.json */,
+				CFDC0738298585F4009E58E3 /* like.json */,
+			);
+			path = Lottie;
 			sourceTree = "<group>";
 		};
 		CFF88A6B2978A5CB009384CE /* Extensions */ = {
@@ -311,6 +352,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		F9ED5D84D69F3708BF6EBFB8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0F74A6D08F50D5697F1DB42A /* Pods-CoinCrunch.debug.xcconfig */,
+				E58C04004DAEA1778E9A1C22 /* Pods-CoinCrunch.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -318,9 +368,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFA68B932978A27600BA24D2 /* Build configuration list for PBXNativeTarget "CoinCrunch" */;
 			buildPhases = (
+				B91969C169045A03963FBB0D /* [CP] Check Pods Manifest.lock */,
 				CFA68B812978A27400BA24D2 /* Sources */,
 				CFA68B822978A27400BA24D2 /* Frameworks */,
 				CFA68B832978A27400BA24D2 /* Resources */,
+				1E3C4BFED9DED30F611CFC7B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -369,12 +421,59 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFDC0740298590D4009E58E3 /* chat.json in Resources */,
 				CFA68B902978A27600BA24D2 /* Preview Assets.xcassets in Resources */,
 				CFF88A6A2978A439009384CE /* Assets.xcassets in Resources */,
+				CFDC0742298590ED009E58E3 /* profile.json in Resources */,
+				CFDC0739298585F4009E58E3 /* like.json in Resources */,
+				CFDC074429859103009E58E3 /* settings.json in Resources */,
+				CFDC073E298590B1009E58E3 /* home.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E3C4BFED9DED30F611CFC7B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CoinCrunch/Pods-CoinCrunch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CoinCrunch/Pods-CoinCrunch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CoinCrunch/Pods-CoinCrunch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B91969C169045A03963FBB0D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CoinCrunch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CFA68B812978A27400BA24D2 /* Sources */ = {
@@ -408,6 +507,7 @@
 				CFF88AA8297C9CF5009384CE /* CoinLogoView.swift in Sources */,
 				CFF88A9E297C64FA009384CE /* HomeStatsView.swift in Sources */,
 				CFF88AA2297C6D0B009384CE /* MarketDataService.swift in Sources */,
+				CFDC073B298586B3009E58E3 /* LottieView.swift in Sources */,
 				CFF88A792978B1C9009384CE /* CircleButtonAnimationView.swift in Sources */,
 				CFF88A92297C36A6009384CE /* CoinImageViewModel.swift in Sources */,
 				CFF44F67298464080042270A /* ColorSchemeManager.swift in Sources */,
@@ -543,11 +643,13 @@
 		};
 		CFA68B942978A27600BA24D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F74A6D08F50D5697F1DB42A /* Pods-CoinCrunch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"CoinCrunch/Preview Content\"";
 				DEVELOPMENT_TEAM = NKA7PWRC7T;
 				ENABLE_PREVIEWS = YES;
@@ -578,11 +680,13 @@
 		};
 		CFA68B952978A27600BA24D2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E58C04004DAEA1778E9A1C22 /* Pods-CoinCrunch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"CoinCrunch/Preview Content\"";
 				DEVELOPMENT_TEAM = NKA7PWRC7T;
 				ENABLE_PREVIEWS = YES;

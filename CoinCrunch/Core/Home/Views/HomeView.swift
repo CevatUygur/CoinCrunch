@@ -6,31 +6,70 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct HomeView: View {
-    
+
     @EnvironmentObject private var vm: HomeViewModel
 
     @State private var showSettingsView: Bool = false // <- new sheet
     @State private var selectedCoin: CoinModel? = nil
     @State private var showDetailView: Bool = false
     
+    @State private var showPortfolio: Bool = false
+
     var body: some View {
         TabView {
-            homeBodyView
-                .tabItem {
-                    Label("Live Prices", systemImage: "chart.line.uptrend.xyaxis")
-                }
-            
-            PortfolioView()
-                .tabItem {
-                    Label("Portfolio", systemImage: "chart.pie")
-                }
-            
-            ProfileView()
-                .tabItem {
-                    Label("Profile", systemImage: "person")
-                }
+                if #available(iOS 16.0, *) {
+                homeBodyView
+                    .tabItem {
+                        Label("Live Prices", systemImage: "chart.line.uptrend.xyaxis")
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar(.hidden)
+            } else {
+                // Fallback on earlier versions
+                homeBodyView
+                    .tabItem {
+                        Label("Live Prices", systemImage: "chart.line.uptrend.xyaxis")
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarHidden(true)
+            }
+
+            if #available(iOS 16.0, *) {
+                PortfolioView()
+                    .tabItem {
+                        Label("Portfolio", systemImage: "chart.pie")
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar(.hidden)
+            } else {
+                // Fallback on earlier versions
+                PortfolioView()
+                    .tabItem {
+                        Label("Portfolio", systemImage: "chart.pie")
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarHidden(true)
+            }
+
+            if #available(iOS 16.0, *) {
+                ProfileView()
+                    .tabItem {
+                        Label("Profile", systemImage: "person")
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar(.hidden)
+            } else {
+                // Fallback on earlier versions
+                ProfileView()
+                    .tabItem {
+                        Label("Profile", systemImage: "person")
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarHidden(true)
+            }
         }
         .accentColor(Color.theme.accent)
     }
@@ -40,25 +79,25 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             HomeView()
-                .navigationBarHidden(true)
         }
         .environmentObject(dev.homeVM)
     }
 }
 
 extension HomeView {
-    
+
     private var homeBodyView: some View {
         ZStack {
             VStack {
                 homeHeader
                 HomeStatsView(showPortfolio: false)
                 SearchBarView(searchText: $vm.searchText)
+
                 columnTitles
-                
+
                 allCoinsList
                     .transition(.move(edge: .leading))
-                
+
                 Spacer(minLength: 0)
             }
             .sheet(isPresented: $showSettingsView) {
@@ -68,11 +107,10 @@ extension HomeView {
         .background(
             NavigationLink(isActive: $showDetailView, destination: {
                 DetailLoadingView(coin: $selectedCoin)
-                    .navigationBarTitleDisplayMode(.large)
             }, label: { EmptyView() })
         )
     }
-    
+
     private var homeHeader: some View {
         HStack {
             Text("Live Prices")
@@ -88,7 +126,7 @@ extension HomeView {
         }
         .padding(.horizontal)
     }
-    
+
     private var allCoinsList: some View {
         List {
             ForEach(vm.allCoins) { coin in
@@ -104,7 +142,7 @@ extension HomeView {
             vm.reloadData()
         }
     }
-    
+
     private var columnTitles: some View {
         HStack {
             HStack(spacing: 4) {
@@ -118,11 +156,11 @@ extension HomeView {
                     vm.sortOption = vm.sortOption == .rank ? .rankReversed : .rank
                 }
             }
-            
+
             Spacer()
-            
+
             HStack(spacing: 4) {
-                Text("Price")
+                Text("Current Price")
                 Image(systemName: "chevron.down")
                     .opacity((vm.sortOption == .price || vm.sortOption == .priceReversed) ? 1.0 : 0.0)
                     .rotationEffect(Angle(degrees: vm.sortOption == .price ? 0 : 180))
@@ -133,16 +171,16 @@ extension HomeView {
                     vm.sortOption = vm.sortOption == .price ? .priceReversed : .price
                 }
             }
-            
+
         }
         .font(.caption)
         .foregroundColor(Color.theme.secondaryText)
         .padding(.horizontal)
     }
-    
+
     private func segue(coin: CoinModel) {
         selectedCoin = coin
         showDetailView.toggle()
     }
-    
+
 }

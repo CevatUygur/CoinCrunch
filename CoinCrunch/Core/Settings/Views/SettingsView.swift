@@ -31,6 +31,7 @@ struct SettingsView: View {
             }
             .listStyle(GroupedListStyle())
             .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     XMarkButton(dismiss: _dismiss)
@@ -43,7 +44,6 @@ struct SettingsView: View {
 extension SettingsView {
 
     private var AppearanceSelectionPicker: some View {
-        
         VStack {
             Picker("App Theme", selection: $csManager.colorScheme) {
                 Text("Device settings")
@@ -52,7 +52,7 @@ extension SettingsView {
                     .tag(ColorScheme.dark)
                 Text("Light mode")
                     .tag(ColorScheme.light)
-                
+
             }
             .pickerStyle(.automatic)
         }

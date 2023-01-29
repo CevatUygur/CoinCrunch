@@ -14,6 +14,8 @@ struct PortfolioView: View {
     @State private var selectedCoin: CoinModel? = nil
     @State private var showDetailView: Bool = false
     
+    @State private var showPortfolio: Bool = false
+    
     var body: some View {
         portfolioBodyView
     }
@@ -23,7 +25,6 @@ struct PortfolioView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             PortfolioView()
-                .navigationBarHidden(true)
         }
         .environmentObject(dev.homeVM)
     }
@@ -58,7 +59,6 @@ extension PortfolioView {
         .background(
             NavigationLink(isActive: $showDetailView, destination: {
                 DetailLoadingView(coin: $selectedCoin)
-                    .navigationBarTitleDisplayMode(.large)
             }, label: { EmptyView() })
         )
     }
@@ -74,6 +74,7 @@ extension PortfolioView {
                 .onTapGesture {
                     showPortfolioView.toggle()
                 }
+
         }
         .padding(.horizontal)
     }
@@ -123,7 +124,7 @@ extension PortfolioView {
             }
 
             HStack(spacing: 4) {
-                Text("Price")
+                Text("Current Price")
                 Image(systemName: "chevron.down")
                     .opacity((vm.sortOption == .price || vm.sortOption == .priceReversed) ? 1.0 : 0.0)
                     .rotationEffect(Angle(degrees: vm.sortOption == .price ? 0 : 180))
@@ -145,5 +146,4 @@ extension PortfolioView {
         selectedCoin = coin
         showDetailView.toggle()
     }
-    
 }

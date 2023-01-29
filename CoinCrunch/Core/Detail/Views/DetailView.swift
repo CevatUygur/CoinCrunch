@@ -53,7 +53,7 @@ struct DetailView: View {
                 .padding()
             }
         }
-        .navigationTitle(vm.coin.name)
+        .navigationBarTitle(vm.coin.name)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 navigationBarTrailingItems
