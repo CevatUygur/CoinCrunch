@@ -13,7 +13,7 @@ struct HomeView: View {
     @EnvironmentObject private var vm: HomeViewModel
 
     @State private var showSettingsView: Bool = false // <- new sheet
-    @State private var selectedCoin: CoinModel? = nil
+    @State private var selectedCoin: CoinModel?
     @State private var showDetailView: Bool = false
     
     @State private var showPortfolio: Bool = false

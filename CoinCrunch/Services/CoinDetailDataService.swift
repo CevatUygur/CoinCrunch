@@ -10,7 +10,7 @@ import Combine
 
 class CoinDetailsDataService {
     
-    @Published var coinDetails: CoinDetailModel? = nil
+    @Published var coinDetails: CoinDetailModel?
     
     var coinDetailSubscription: AnyCancellable?
     let coin: CoinModel

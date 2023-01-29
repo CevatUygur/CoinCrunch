@@ -11,7 +11,7 @@ struct EditPortfolioView: View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var vm: HomeViewModel
-    @State private var selectedCoin: CoinModel? = nil
+    @State private var selectedCoin: CoinModel?
     @State private var quantityText: String = ""
     @State private var showCheckmark: Bool = false
     
