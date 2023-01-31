@@ -25,7 +25,7 @@
 		CFDC0746298675AC009E58E3 /* AppearanceModeSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC0745298675AC009E58E3 /* AppearanceModeSwitchView.swift */; };
 		CFE36BF029899D0100591389 /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE36BEF29899D0100591389 /* WatchListView.swift */; };
 		CFF44F67298464080042270A /* ColorSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F66298464080042270A /* ColorSchemeManager.swift */; };
-		CFF44F69298477DE0042270A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F68298477DE0042270A /* ProfileView.swift */; };
+		CFF44F69298477DE0042270A /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F68298477DE0042270A /* MenuView.swift */; };
 		CFF44F6B29847EF20042270A /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F6A29847EF20042270A /* PortfolioView.swift */; };
 		CFF88A6A2978A439009384CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFF88A692978A439009384CE /* Assets.xcassets */; };
 		CFF88A6D2978A5E5009384CE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF88A6C2978A5E5009384CE /* Color.swift */; };
@@ -82,7 +82,7 @@
 		CFDC0745298675AC009E58E3 /* AppearanceModeSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceModeSwitchView.swift; sourceTree = "<group>"; };
 		CFE36BEF29899D0100591389 /* WatchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListView.swift; sourceTree = "<group>"; };
 		CFF44F66298464080042270A /* ColorSchemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeManager.swift; sourceTree = "<group>"; };
-		CFF44F68298477DE0042270A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		CFF44F68298477DE0042270A /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		CFF44F6A29847EF20042270A /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
 		CFF88A692978A439009384CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Downloads/Resources/Assets.xcassets; sourceTree = "<group>"; };
 		CFF88A6C2978A5E5009384CE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -254,7 +254,7 @@
 				CFE36BEF29899D0100591389 /* WatchListView.swift */,
 				CFF88A7E2978CB62009384CE /* CoinRowView.swift */,
 				CFF88AA3297C75A4009384CE /* EditPortfolioView.swift */,
-				CFF44F68298477DE0042270A /* ProfileView.swift */,
+				CFF44F68298477DE0042270A /* MenuView.swift */,
 				CFDC0745298675AC009E58E3 /* AppearanceModeSwitchView.swift */,
 			);
 			path = Views;
@@ -487,7 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFF88AAC297D4390009384CE /* PortfolioContainer.xcdatamodeld in Sources */,
-				CFF44F69298477DE0042270A /* ProfileView.swift in Sources */,
+				CFF44F69298477DE0042270A /* MenuView.swift in Sources */,
 				CFF88A9A297C5FD2009384CE /* StatisticModel.swift in Sources */,
 				CFE36BF029899D0100591389 /* WatchListView.swift in Sources */,
 				CFF88A88297951B2009384CE /* CoinDataService.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct MenuView: View {
     
     @EnvironmentObject private var vm: HomeViewModel
     @State private var showPortfolioView: Bool = false // <- new sheet
@@ -18,7 +18,7 @@ struct ProfileView: View {
     var body: some View {
         //profileBodyView
         VStack{
-            profileHeader
+            menuHeader
             NavigationView {
                 List {
                     Text("App Settings")
@@ -40,13 +40,13 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ProfileView()
+            MenuView()
         }
         .environmentObject(dev.homeVM)
     }
 }
 
-extension ProfileView {
+extension MenuView {
     
     private var profileBodyView: some View {
         ZStack {
@@ -60,7 +60,7 @@ extension ProfileView {
             
             // content layer
             VStack {
-                profileHeader
+                menuHeader
                 HomeStatsView(showPortfolio: true)
                 columnTitles
                 
@@ -78,9 +78,9 @@ extension ProfileView {
         )
     }
     
-    private var profileHeader: some View {
+    private var menuHeader: some View {
         HStack {
-            Text("Profile")
+            Text("Menu")
                 .font(.title)
                 .fontWeight(.heavy)
                 .foregroundColor(Color.theme.accent)

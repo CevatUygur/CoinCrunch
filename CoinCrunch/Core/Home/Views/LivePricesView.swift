@@ -72,17 +72,17 @@ struct LivePricesView: View {
             }
 
             if #available(iOS 16.0, *) {
-                ProfileView()
+                MenuView()
                     .tabItem {
-                        Label("Profile", systemImage: "person")
+                        Label("Menu", systemImage: "line.3.horizontal")
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar(.hidden)
             } else {
                 // Fallback on earlier versions
-                ProfileView()
+                MenuView()
                     .tabItem {
-                        Label("Profile", systemImage: "person")
+                        Label("Menu", systemImage: "line.3.horizontal")
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true)
