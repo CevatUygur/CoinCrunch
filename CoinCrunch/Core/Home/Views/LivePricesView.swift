@@ -8,7 +8,7 @@
 import SwiftUI
 import Lottie
 
-struct HomeView: View {
+struct LivePricesView: View {
 
     @EnvironmentObject private var vm: HomeViewModel
 
@@ -20,7 +20,7 @@ struct HomeView: View {
 
     var body: some View {
         TabView {
-                if #available(iOS 16.0, *) {
+            if #available(iOS 16.0, *) {
                 homeBodyView
                     .tabItem {
                         Label("Live Prices", systemImage: "chart.line.uptrend.xyaxis")
@@ -49,6 +49,23 @@ struct HomeView: View {
                 PortfolioView()
                     .tabItem {
                         Label("Portfolio", systemImage: "chart.pie")
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarHidden(true)
+            }
+            
+            if #available(iOS 16.0, *) {
+                WatchListView()
+                    .tabItem {
+                        Label("Watch List", systemImage: "star")
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar(.hidden)
+            } else {
+                // Fallback on earlier versions
+                WatchListView()
+                    .tabItem {
+                        Label("Watch List", systemImage: "star")
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true)
@@ -78,13 +95,13 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            HomeView()
+            LivePricesView()
         }
         .environmentObject(dev.homeVM)
     }
 }
 
-extension HomeView {
+extension LivePricesView {
 
     private var homeBodyView: some View {
         ZStack {

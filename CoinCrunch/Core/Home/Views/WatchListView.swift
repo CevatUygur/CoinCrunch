@@ -1,24 +1,27 @@
 //
-//  ProfileView.swift
+//  WatchListView.swift
 //  CoinCrunch
 //
-//  Created by CEVAT UYGUR on 28.01.2023.
+//  Created by CEVAT UYGUR on 31.01.2023.
 //
 
 import SwiftUI
+import Lottie
 
-struct ProfileView: View {
-    
+struct WatchListView: View {
+
     @EnvironmentObject private var vm: HomeViewModel
-    @State private var showPortfolioView: Bool = false // <- new sheet
+
+    @State private var showSettingsView: Bool = false // <- new sheet
     @State private var selectedCoin: CoinModel?
     @State private var showDetailView: Bool = false
-    @State private var showSettingsView: Bool = false // <- new sheet
     
+    @State private var showPortfolio: Bool = false
+
     var body: some View {
         //profileBodyView
         VStack{
-            profileHeader
+            watchListHeader
             NavigationView {
                 List {
                     Text("App Settings")
@@ -33,43 +36,37 @@ struct ProfileView: View {
                 SettingsView()
             }
         }
-       
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
+struct WatchListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ProfileView()
+            LivePricesView()
         }
         .environmentObject(dev.homeVM)
     }
 }
 
-extension ProfileView {
-    
-    private var profileBodyView: some View {
+extension WatchListView {
+
+    private var watchListBodyView: some View {
         ZStack {
-            // background layer
-            Color.theme.background
-                .ignoresSafeArea()
-                .sheet(isPresented: $showPortfolioView) {
-                    EditPortfolioView()
-                        .environmentObject(vm)
-                }
-            
-            // content layer
             VStack {
-                profileHeader
-                HomeStatsView(showPortfolio: true)
+                watchListHeader
+                HomeStatsView(showPortfolio: false)
+                SearchBarView(searchText: $vm.searchText)
+
                 columnTitles
-                
-                portfolioCoinsList
-                    .transition(.move(edge: .trailing))
-                
+
+                allCoinsList
+                    .transition(.move(edge: .leading))
+
                 Spacer(minLength: 0)
             }
-
+            .sheet(isPresented: $showSettingsView) {
+                SettingsView()
+            }
         }
         .background(
             NavigationLink(isActive: $showDetailView, destination: {
@@ -77,10 +74,10 @@ extension ProfileView {
             }, label: { EmptyView() })
         )
     }
-    
-    private var profileHeader: some View {
+
+    private var watchListHeader: some View {
         HStack {
-            Text("Profile")
+            Text("Watch List")
                 .font(.title)
                 .fontWeight(.heavy)
                 .foregroundColor(Color.theme.accent)
@@ -93,11 +90,11 @@ extension ProfileView {
         .padding(.horizontal)
         //.padding(.top, 1)
     }
-    
-    private var portfolioCoinsList: some View {
+
+    private var allCoinsList: some View {
         List {
-            ForEach(vm.portfolioCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: true)
+            ForEach(vm.allCoins) { coin in
+                CoinRowView(coin: coin, showHoldingsColumn: false)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                     .onTapGesture {
                         segue(coin: coin)
@@ -127,19 +124,7 @@ extension ProfileView {
             Spacer()
 
             HStack(spacing: 4) {
-                Text("Holdings")
-                Image(systemName: "chevron.down")
-                    .opacity((vm.sortOption == .holdings || vm.sortOption == .holdingsReversed) ? 1.0 : 0.0)
-                    .rotationEffect(Angle(degrees: vm.sortOption == .holdings ? 0 : 180))
-            }
-            .onTapGesture {
-                withAnimation(.default) {
-                    vm.sortOption = vm.sortOption == .holdings ? .holdingsReversed : .holdings
-                }
-            }
-
-            HStack(spacing: 4) {
-                Text("Price")
+                Text("Current Price")
                 Image(systemName: "chevron.down")
                     .opacity((vm.sortOption == .price || vm.sortOption == .priceReversed) ? 1.0 : 0.0)
                     .rotationEffect(Angle(degrees: vm.sortOption == .price ? 0 : 180))
@@ -156,9 +141,11 @@ extension ProfileView {
         .foregroundColor(Color.theme.secondaryText)
         .padding(.horizontal)
     }
-    
+
     private func segue(coin: CoinModel) {
         selectedCoin = coin
         showDetailView.toggle()
     }
+
 }
+

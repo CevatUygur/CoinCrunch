@@ -22,7 +22,7 @@ struct CoinCrunchApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                HomeView()
+                LivePricesView()
                     //.navigationBarHidden(true)
                     //.navigationBarTitleDisplayMode(.inline)
             }
