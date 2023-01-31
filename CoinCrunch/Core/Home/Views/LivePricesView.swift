@@ -70,6 +70,23 @@ struct LivePricesView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true)
             }
+            
+            if #available(iOS 16.0, *) {
+                NewsView()
+                    .tabItem {
+                        Label("News", systemImage: "newspaper")
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar(.hidden)
+            } else {
+                // Fallback on earlier versions
+                NewsView()
+                    .tabItem {
+                        Label("News", systemImage: "newspaper")
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarHidden(true)
+            }
 
             if #available(iOS 16.0, *) {
                 MenuView()

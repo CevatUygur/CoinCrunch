@@ -24,6 +24,7 @@
 		CFDC074429859103009E58E3 /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = CFDC074329859102009E58E3 /* settings.json */; };
 		CFDC0746298675AC009E58E3 /* AppearanceModeSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC0745298675AC009E58E3 /* AppearanceModeSwitchView.swift */; };
 		CFE36BF029899D0100591389 /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE36BEF29899D0100591389 /* WatchListView.swift */; };
+		CFE36BF22989A3EB00591389 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE36BF12989A3EB00591389 /* NewsView.swift */; };
 		CFF44F67298464080042270A /* ColorSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F66298464080042270A /* ColorSchemeManager.swift */; };
 		CFF44F69298477DE0042270A /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F68298477DE0042270A /* MenuView.swift */; };
 		CFF44F6B29847EF20042270A /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F6A29847EF20042270A /* PortfolioView.swift */; };
@@ -81,6 +82,7 @@
 		CFDC074329859102009E58E3 /* settings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings.json; sourceTree = "<group>"; };
 		CFDC0745298675AC009E58E3 /* AppearanceModeSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceModeSwitchView.swift; sourceTree = "<group>"; };
 		CFE36BEF29899D0100591389 /* WatchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListView.swift; sourceTree = "<group>"; };
+		CFE36BF12989A3EB00591389 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		CFF44F66298464080042270A /* ColorSchemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeManager.swift; sourceTree = "<group>"; };
 		CFF44F68298477DE0042270A /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		CFF44F6A29847EF20042270A /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
@@ -249,12 +251,13 @@
 			isa = PBXGroup;
 			children = (
 				CFF88A722978AC20009384CE /* LivePricesView.swift */,
-				CFF88A9D297C64FA009384CE /* HomeStatsView.swift */,
 				CFF44F6A29847EF20042270A /* PortfolioView.swift */,
 				CFE36BEF29899D0100591389 /* WatchListView.swift */,
+				CFE36BF12989A3EB00591389 /* NewsView.swift */,
+				CFF44F68298477DE0042270A /* MenuView.swift */,
+				CFF88A9D297C64FA009384CE /* HomeStatsView.swift */,
 				CFF88A7E2978CB62009384CE /* CoinRowView.swift */,
 				CFF88AA3297C75A4009384CE /* EditPortfolioView.swift */,
-				CFF44F68298477DE0042270A /* MenuView.swift */,
 				CFDC0745298675AC009E58E3 /* AppearanceModeSwitchView.swift */,
 			);
 			path = Views;
@@ -487,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFF88AAC297D4390009384CE /* PortfolioContainer.xcdatamodeld in Sources */,
+				CFE36BF22989A3EB00591389 /* NewsView.swift in Sources */,
 				CFF44F69298477DE0042270A /* MenuView.swift in Sources */,
 				CFF88A9A297C5FD2009384CE /* StatisticModel.swift in Sources */,
 				CFE36BF029899D0100591389 /* WatchListView.swift in Sources */,

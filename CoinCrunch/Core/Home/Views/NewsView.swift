@@ -1,5 +1,5 @@
 //
-//  WatchListView.swift
+//  NewsView.swift
 //  CoinCrunch
 //
 //  Created by CEVAT UYGUR on 31.01.2023.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Lottie
 
-struct WatchListView: View {
+struct NewsView: View {
 
     @EnvironmentObject private var vm: HomeViewModel
 
@@ -21,17 +21,17 @@ struct WatchListView: View {
     var body: some View {
         //profileBodyView
         VStack{
-            watchListHeader
+            newsHeader
             NavigationView {
                 List {
-                    Text("Sample Coin")
+                    Text("Sample New")
                 }
             }
         }
     }
 }
 
-struct WatchListView_Previews: PreviewProvider {
+struct NewsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             LivePricesView()
@@ -40,12 +40,11 @@ struct WatchListView_Previews: PreviewProvider {
     }
 }
 
-extension WatchListView {
+extension NewsView {
 
     private var watchListBodyView: some View {
         ZStack {
             VStack {
-                watchListHeader
                 HomeStatsView(showPortfolio: false)
                 SearchBarView(searchText: $vm.searchText)
 
@@ -67,9 +66,9 @@ extension WatchListView {
         )
     }
 
-    private var watchListHeader: some View {
+    private var newsHeader: some View {
         HStack {
-            Text("Watch List")
+            Text("News")
                 .font(.title)
                 .fontWeight(.heavy)
                 .foregroundColor(Color.theme.accent)
@@ -140,4 +139,5 @@ extension WatchListView {
     }
 
 }
+
 
