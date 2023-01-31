@@ -16,22 +16,20 @@ struct MenuView: View {
     @State private var showSettingsView: Bool = false // <- new sheet
     
     var body: some View {
-        //profileBodyView
-        VStack{
-            menuHeader
-            NavigationView {
-                List {
-                    Text("App Settings")
-                }
-                
-                .onTapGesture {
-                    showSettingsView.toggle()
-                }
-                
-                }
-            .sheet(isPresented: $showSettingsView) {
-                SettingsView()
+        
+        NavigationView {
+            List {
+                Text("App Settings")
             }
+            .onTapGesture {
+                showSettingsView.toggle()
+            }
+            .listStyle(.grouped)
+            .navigationTitle("Menu")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        .sheet(isPresented: $showSettingsView) {
+            SettingsView()
         }
        
     }
@@ -85,13 +83,13 @@ extension MenuView {
                 .fontWeight(.heavy)
                 .foregroundColor(Color.theme.accent)
             Spacer()
-            //CircleButtonView(iconName: "info")
+            CircleButtonView(iconName: "info")
 //                .onTapGesture {
 //                    showPortfolioView.toggle()
 //                }
         }
         .padding(.horizontal)
-        //.padding(.top, 1)
+        //.padding(.top, 19)
     }
     
     private var portfolioCoinsList: some View {

@@ -19,14 +19,13 @@ struct WatchListView: View {
     @State private var showPortfolio: Bool = false
 
     var body: some View {
-        //profileBodyView
-        VStack{
-            watchListHeader
-            NavigationView {
-                List {
-                    Text("Sample Coin")
-                }
+        NavigationView {
+            List {
+                Text("Sample Added Coin")
             }
+            .listStyle(.grouped)
+            .navigationTitle("Watch List")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
@@ -34,7 +33,7 @@ struct WatchListView: View {
 struct WatchListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LivePricesView()
+            WatchListView()
         }
         .environmentObject(dev.homeVM)
     }
@@ -80,7 +79,7 @@ extension WatchListView {
 //                }
         }
         .padding(.horizontal)
-        //.padding(.top, 1)
+        .padding(.top, 19)
     }
 
     private var allCoinsList: some View {

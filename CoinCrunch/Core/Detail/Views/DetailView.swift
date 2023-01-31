@@ -28,7 +28,7 @@ struct DetailView: View {
         GridItem(.flexible()),
         GridItem(.flexible()),
     ]
-    private let spacing: CGFloat = 30
+    private let spacing: CGFloat = 20
     
     init(coin: CoinModel) {
         _vm = StateObject(wrappedValue: DetailViewModel(coin: coin))
@@ -40,7 +40,7 @@ struct DetailView: View {
                 ChartView(coin: vm.coin)
                     .padding(.vertical)
                 
-                VStack(spacing: 20) {
+                VStack(spacing: 16) {
                     overviewTitle
                     Divider()
                     descriptionSection
@@ -48,6 +48,7 @@ struct DetailView: View {
                     additionalTitle
                     Divider()
                     additionalGrid
+                    Divider()
                     websiteSection
                 }
                 .padding()
@@ -140,19 +141,37 @@ extension DetailView {
     }
     
     private var websiteSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        HStack(alignment: .top, spacing: 0) {
             if let websiteString = vm.websiteURL,
                let url = URL(string: websiteString) {
-                Link("Website", destination: url)
+                Button {
+                    UIApplication.shared.open(url)
+                } label: {
+                    Text("Website")
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .padding()
+                        .background(Color.theme.secondaryText.opacity(0.2))
+                        .cornerRadius(10)
+                }
             }
+
+            Spacer()
             
             if let redditString = vm.redditURL,
                let url = URL(string: redditString) {
-                Link("Reddit", destination: url)
+                Button {
+                    UIApplication.shared.open(url)
+                } label: {
+                    Text("Reddit")
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .padding()
+                        .background(Color.theme.secondaryText.opacity(0.2))
+                        .cornerRadius(10)
+                }
             }
         }
         .accentColor(.blue)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity)
         .font(.headline)
     }
     

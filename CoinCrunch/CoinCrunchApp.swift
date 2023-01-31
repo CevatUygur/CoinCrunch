@@ -17,14 +17,17 @@ struct CoinCrunchApp: App {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(Color.theme.accent)]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(Color.theme.accent)]
         UITabBar.appearance().backgroundColor = UIColor(Color.theme.background)
+        
+        let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+            UINavigationBar.appearance().standardAppearance = navBarAppearance
     }
     
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 LivePricesView()
-                    //.navigationBarHidden(true)
-                    //.navigationBarTitleDisplayMode(.inline)
             }
             .accentColor(Color.theme.accent)
             .environmentObject(vm)

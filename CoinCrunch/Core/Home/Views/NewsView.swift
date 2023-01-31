@@ -19,14 +19,13 @@ struct NewsView: View {
     @State private var showPortfolio: Bool = false
 
     var body: some View {
-        //profileBodyView
-        VStack{
-            newsHeader
-            NavigationView {
-                List {
-                    Text("Sample New")
-                }
+        NavigationView {
+            List {
+                Text("Sample New")
             }
+            .listStyle(.grouped)
+            .navigationTitle("News")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
@@ -34,7 +33,7 @@ struct NewsView: View {
 struct NewsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LivePricesView()
+            NewsView()
         }
         .environmentObject(dev.homeVM)
     }
@@ -73,13 +72,9 @@ extension NewsView {
                 .fontWeight(.heavy)
                 .foregroundColor(Color.theme.accent)
             Spacer()
-            //CircleButtonView(iconName: "info")
-//                .onTapGesture {
-//                    showPortfolioView.toggle()
-//                }
         }
         .padding(.horizontal)
-        //.padding(.top, 1)
+        .padding(.top, 19)
     }
 
     private var allCoinsList: some View {
