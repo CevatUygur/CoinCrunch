@@ -147,11 +147,14 @@ extension DetailView {
                 Button {
                     UIApplication.shared.open(url)
                 } label: {
-                    Text("Website")
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding()
-                        .background(Color.theme.secondaryText.opacity(0.2))
-                        .cornerRadius(10)
+                    HStack {
+                        Image(systemName: "link")
+                        Text("Website")
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .padding()
+                    .background(Color.theme.secondaryText.opacity(0.2))
+                    .cornerRadius(10)
                 }
             }
 
@@ -162,11 +165,15 @@ extension DetailView {
                 Button {
                     UIApplication.shared.open(url)
                 } label: {
-                    Text("Reddit")
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding()
-                        .background(Color.theme.secondaryText.opacity(0.2))
-                        .cornerRadius(10)
+                    HStack {
+                        Image(systemName: "link")
+                        Text("Reddit")
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .padding()
+                    .background(Color.theme.secondaryText.opacity(0.2))
+                    .cornerRadius(10)
+                    
                 }
             }
         }
