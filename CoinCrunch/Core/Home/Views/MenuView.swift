@@ -17,7 +17,6 @@ struct MenuView: View {
     @State private var showPortfolioView: Bool = false // <- new sheet
     @State private var selectedCoin: CoinModel?
     @State private var showDetailView: Bool = false
-    //@ObservableObject private var showAppearanceSwithView: Bool // <- new sheet
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -37,27 +36,8 @@ struct MenuView: View {
             .navigationTitle("Menu")
             .navigationBarTitleDisplayMode(.inline)
         }
-//        .sheet(isPresented: $manager.showAppearanceSwitchView) {
-//            VStack {
-//
-//                if manager.colorScheme.rawValue == 0 {
-//                    Text ("Device Settings Mode On")
-//                } else if manager.colorScheme.rawValue == 1 {
-//                    Text ("Light Mode On")
-//                } else {
-//                    Text ("Dark Mode On")
-//                }
-//
-//            }
-//            .frame(width: 100, height: 100)
-//            .background(Color.red)
-//        }
-        .fullScreenCover(isPresented: $manager.showAppearanceSwitchView) {
-            FullScreenModalView.init(manager: manager)
-                
-        }
-        .transaction { transction in
-            transction.disablesAnimations = true
+        .easyFullScreenCover(isPresented: $manager.showAppearanceSwitchView) {
+            ApperanceModeSwitchView(manager: manager)
         }
     }
 }
@@ -67,44 +47,7 @@ struct MenuView_Previews: PreviewProvider {
         NavigationView {
             //MenuView()
         }
-        //.environmentObject(MenuView.csManager)
         .environmentObject(dev.homeVM)
-    }
-}
-
-struct FullScreenModalView: View {
-    @Environment(\.dismiss) var dismiss
-    @ObservedObject var manager: ColorSchemeManager
-    
-    var body: some View {
-        ZStack {
-            VStack {
-                if manager.colorScheme.rawValue == 0 {
-                    Image(systemName: "arrow.turn.up.forward.iphone")
-                        .font(.system(size: 80))
-                        .padding()
-                    Text("Device Settings Mode On")
-                        .font(.system(size: 20))
-                } else if manager.colorScheme.rawValue == 1 {
-                    Image(systemName: "sun.max")
-                        .font(.system(size: 80))
-                        .padding()
-                    Text("Light Mode On")
-                        .font(.system(size: 20))
-                } else {
-                    Image(systemName: "moon.fill")
-                        .font(.system(size: 80))
-                        .padding()
-                    Text("Dark Mode On")
-                        .font(.system(size: 20))
-                }
-            }
-        }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                dismiss()
-            }
-        }
     }
 }
 
@@ -166,7 +109,6 @@ extension MenuView {
 //                }
         }
         .padding(.horizontal)
-        //.padding(.top, 19)
     }
     
     private var portfolioCoinsList: some View {

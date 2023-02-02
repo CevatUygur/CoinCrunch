@@ -19,7 +19,10 @@ class ColorSchemeManager: ObservableObject {
         didSet {
             applyColorScheme()
             print("DEBUG: Color Scheme Changed. selected: \(colorScheme)")
-            showAppearanceSwitchView = true
+            
+            withAnimation{
+                showAppearanceSwitchView = true
+            }
         }
     }
     
