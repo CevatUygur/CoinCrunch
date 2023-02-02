@@ -17,39 +17,34 @@ struct ApperanceModeSwitchView: View {
         
         GeometryReader { geo in
             ZStack {
-                VStack {
-                    if manager.colorScheme.rawValue == 0 {
-                        Image(systemName: "arrow.turn.up.forward.iphone")
-                            .font(.system(size: 80))
-                            .padding()
-                        Text("Device Settings Mode On")
-                            .font(.system(size: 20))
-                    } else if manager.colorScheme.rawValue == 1 {
-                        Image(systemName: "sun.max")
-                            .font(.system(size: 80))
-                            .padding()
-                        Text("Light Mode On")
-                            .font(.system(size: 20))
-                    } else {
-                        Image(systemName: "moon.fill")
-                            .font(.system(size: 80))
-                            .padding()
-                        Text("Dark Mode On")
-                            .font(.system(size: 20))
-                    }
+                if manager.colorScheme.rawValue == 0 {
+                    generateView(imageName: "arrow.turn.up.forward.iphone", textMessage: "Device Settings Mode On")
+                } else if manager.colorScheme.rawValue == 1 {
+                    generateView(imageName: "sun.max", textMessage: "Light Mode On")
+                } else {
+                    generateView(imageName: "moon.fill", textMessage: "Dark Mode On")
                 }
             }
             .frame(width: geo.size.width, height: geo.size.height)
             .edgesIgnoringSafeArea(.all)
             .background(Color.theme.background)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     withAnimation {
                         manager.showAppearanceSwitchView = false
                     }
                 }
-                
             }
+        }
+    }
+    
+    func generateView(imageName: String, textMessage: String) -> some View {
+        VStack {
+            Image(systemName: imageName)
+                .font(.system(size: 120))
+                .padding()
+            Text(textMessage)
+                .font(.system(size: 28))
         }
     }
 }

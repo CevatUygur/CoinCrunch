@@ -11,15 +11,11 @@ import Lottie
 struct LivePricesView: View {
 
     @EnvironmentObject private var vm: HomeViewModel
-    
     @StateObject var manager: ColorSchemeManager
-
-    @State private var showSettingsView: Bool = false // <- new sheet
     @State private var selectedCoin: CoinModel?
     @State private var showDetailView: Bool = false
-    
     @State private var showPortfolio: Bool = false
-
+    
     var body: some View {
         TabView {
             if #available(iOS 16.0, *) {
@@ -111,14 +107,14 @@ struct LivePricesView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            //LivePricesView(manager: )
-        }
-        .environmentObject(dev.homeVM)
-    }
-}
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            //LivePricesView()
+//        }
+//        .environmentObject(dev.homeVM)
+//    }
+//}
 
 extension LivePricesView {
 
@@ -135,9 +131,6 @@ extension LivePricesView {
                     .transition(.move(edge: .leading))
 
                 Spacer(minLength: 0)
-            }
-            .sheet(isPresented: $showSettingsView) {
-                SettingsView()
             }
         }
         .background(
@@ -157,7 +150,7 @@ extension LivePricesView {
             Spacer()
             CircleButtonView(iconName: "line.3.horizontal")
                 .onTapGesture {
-                    //showSettingsView.toggle()
+
                 }
         }
         .padding(.horizontal)
