@@ -11,6 +11,8 @@ import Lottie
 struct LivePricesView: View {
 
     @EnvironmentObject private var vm: HomeViewModel
+    
+    @StateObject var manager: ColorSchemeManager
 
     @State private var showSettingsView: Bool = false // <- new sheet
     @State private var selectedCoin: CoinModel?
@@ -89,7 +91,7 @@ struct LivePricesView: View {
             }
 
             if #available(iOS 16.0, *) {
-                MenuView()
+                MenuView(manager: manager)
                     .tabItem {
                         Label("Menu", systemImage: "line.3.horizontal")
                     }
@@ -97,7 +99,7 @@ struct LivePricesView: View {
                     .toolbar(.hidden)
             } else {
                 // Fallback on earlier versions
-                MenuView()
+                MenuView(manager: manager)
                     .tabItem {
                         Label("Menu", systemImage: "line.3.horizontal")
                     }
@@ -112,7 +114,7 @@ struct LivePricesView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LivePricesView()
+            //LivePricesView(manager: )
         }
         .environmentObject(dev.homeVM)
     }
@@ -155,7 +157,7 @@ extension LivePricesView {
             Spacer()
             CircleButtonView(iconName: "line.3.horizontal")
                 .onTapGesture {
-                    showSettingsView.toggle()
+                    //showSettingsView.toggle()
                 }
         }
         .padding(.horizontal)
@@ -205,7 +207,6 @@ extension LivePricesView {
                     vm.sortOption = vm.sortOption == .price ? .priceReversed : .price
                 }
             }
-
         }
         .font(.caption)
         .foregroundColor(Color.theme.secondaryText)

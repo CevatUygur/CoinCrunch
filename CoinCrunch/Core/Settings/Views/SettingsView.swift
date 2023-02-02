@@ -14,6 +14,9 @@ struct SettingsView: View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var vm: HomeViewModel
+    
+    @State private var showAppearanceSwithView: Bool = true
+    
     let defaultURL = URL(string: "https://www.google.com")!
     
     var body: some View {
@@ -23,20 +26,20 @@ struct SettingsView: View {
                     Text("About")
                     
                 }
-                
                 Section(header: Text("appearance".lowercased()), footer: Text("If you choose Device settings, this app will use the mode that's already selected in the device's settings.")) {
                     AppearanceSelectionPicker
                 }
-                
             }
             .listStyle(GroupedListStyle())
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    XMarkButton(dismiss: _dismiss)
-                }
+        }
+        .sheet(isPresented: $showAppearanceSwithView) {
+            VStack {
+                Text("Deneme")
             }
+            .background(Color.red)
+            
         }
     }
 }
@@ -57,8 +60,11 @@ extension SettingsView {
             .pickerStyle(.automatic)
         }
     }
+    
+    private var AppearanceModeSwitchView: some View {
+        Text("mode activated")
+    }
 }
-
 
 
 struct SettingsView_Previews: PreviewProvider {

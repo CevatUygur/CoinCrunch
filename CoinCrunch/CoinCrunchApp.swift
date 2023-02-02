@@ -12,7 +12,7 @@ struct CoinCrunchApp: App {
     
     @StateObject var csManager = ColorSchemeManager()
     @StateObject private var vm = HomeViewModel()
-    
+        
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(Color.theme.accent)]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(Color.theme.accent)]
@@ -27,7 +27,7 @@ struct CoinCrunchApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                LivePricesView()
+                LivePricesView(manager: csManager)
             }
             .accentColor(Color.theme.accent)
             .environmentObject(vm)
@@ -35,7 +35,6 @@ struct CoinCrunchApp: App {
             .onAppear {
                 csManager.applyColorScheme()
             }
-            
         }
     }
 }

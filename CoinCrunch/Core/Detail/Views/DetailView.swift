@@ -152,8 +152,8 @@ extension DetailView {
                         Text("Website")
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
-                    .padding()
-                    .background(Color.theme.secondaryText.opacity(0.2))
+                    .padding(.vertical, 14)
+                    .background(Color.theme.secondaryText.opacity(0.15))
                     .cornerRadius(10)
                 }
             }
@@ -170,8 +170,8 @@ extension DetailView {
                         Text("Reddit")
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
-                    .padding()
-                    .background(Color.theme.secondaryText.opacity(0.2))
+                    .padding(.vertical, 14)
+                    .background(Color.theme.secondaryText.opacity(0.15))
                     .cornerRadius(10)
                     
                 }

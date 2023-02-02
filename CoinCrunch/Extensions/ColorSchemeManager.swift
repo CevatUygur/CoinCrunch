@@ -13,9 +13,13 @@ enum ColorScheme: Int {
 
 class ColorSchemeManager: ObservableObject {
     
+    @Published var showAppearanceSwitchView: Bool = false
+    
     @AppStorage("colorScheme") var colorScheme: ColorScheme = .unspecified {
         didSet {
             applyColorScheme()
+            print("DEBUG: Color Scheme Changed. selected: \(colorScheme)")
+            showAppearanceSwitchView = true
         }
     }
     
