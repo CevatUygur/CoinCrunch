@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Lottie
+import HidableTabView
 
 struct LivePricesView: View {
 
@@ -22,14 +23,16 @@ struct LivePricesView: View {
                 homeBodyView
                     .tabItem {
                         Label("Live Prices", systemImage: "chart.line.uptrend.xyaxis")
+                            .accessibilityLabel("Live Prices")
                     }
                     .navigationBarTitleDisplayMode(.inline)
-                    .toolbar(.hidden)
+                    .toolbar(.hidden, for: .navigationBar)
             } else {
                 // Fallback on earlier versions
                 homeBodyView
                     .tabItem {
                         Label("Live Prices", systemImage: "chart.line.uptrend.xyaxis")
+                            .accessibilityLabel("Live Prices")
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true)
@@ -39,14 +42,16 @@ struct LivePricesView: View {
                 PortfolioView()
                     .tabItem {
                         Label("Portfolio", systemImage: "chart.pie")
+                            .accessibilityLabel("Portfolio")
                     }
                     .navigationBarTitleDisplayMode(.inline)
-                    .toolbar(.hidden)
+                    .toolbar(.hidden, for: .navigationBar)
             } else {
                 // Fallback on earlier versions
                 PortfolioView()
                     .tabItem {
                         Label("Portfolio", systemImage: "chart.pie")
+                            .accessibilityLabel("Portfolio")
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true)
@@ -56,14 +61,16 @@ struct LivePricesView: View {
                 WatchListView()
                     .tabItem {
                         Label("Watch List", systemImage: "star")
+                            .accessibilityLabel("Watch List")
                     }
                     .navigationBarTitleDisplayMode(.inline)
-                    .toolbar(.hidden)
+                    .toolbar(.hidden, for: .navigationBar)
             } else {
                 // Fallback on earlier versions
                 WatchListView()
                     .tabItem {
                         Label("Watch List", systemImage: "star")
+                            .accessibilityLabel("Watch List")
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true)
@@ -73,14 +80,16 @@ struct LivePricesView: View {
                 NewsView()
                     .tabItem {
                         Label("News", systemImage: "newspaper")
+                            .accessibilityLabel("News")
                     }
                     .navigationBarTitleDisplayMode(.inline)
-                    .toolbar(.hidden)
+                    .toolbar(.hidden, for: .navigationBar)
             } else {
                 // Fallback on earlier versions
                 NewsView()
                     .tabItem {
                         Label("News", systemImage: "newspaper")
+                            .accessibilityLabel("News")
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true)
@@ -90,15 +99,18 @@ struct LivePricesView: View {
                 MenuView(manager: manager)
                     .tabItem {
                         Label("Menu", systemImage: "line.3.horizontal")
+                            .accessibilityLabel("Menu")
                     }
                     .navigationBarTitleDisplayMode(.inline)
-                    .toolbar(.hidden)
+                    .toolbar(.hidden, for: .navigationBar)
             } else {
                 // Fallback on earlier versions
                 MenuView(manager: manager)
                     .tabItem {
                         Label("Menu", systemImage: "line.3.horizontal")
+                            .accessibilityLabel("Menu")
                     }
+                    
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true)
             }

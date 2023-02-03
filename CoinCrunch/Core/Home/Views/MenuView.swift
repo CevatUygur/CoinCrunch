@@ -38,7 +38,14 @@ struct MenuView: View {
         }
         .easyFullScreenCover(isPresented: $manager.showAppearanceSwitchView) {
             ApperanceModeSwitchView(manager: manager)
+                .onAppear {
+                    UITabBar.hideTabBar(animated: false)
+                }
+                .onDisappear() {
+                    UITabBar.showTabBar(animated: false)
+                }
         }
+        .statusBarHidden(manager.showAppearanceSwitchView)
     }
 }
 
