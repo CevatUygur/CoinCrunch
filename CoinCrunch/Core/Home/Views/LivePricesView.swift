@@ -60,8 +60,8 @@ struct LivePricesView: View {
             if #available(iOS 16.0, *) {
                 WatchListView()
                     .tabItem {
-                        Label("Watch List", systemImage: "star")
-                            .accessibilityLabel("Watch List")
+                        Label("Watchlist", systemImage: "star")
+                            .accessibilityLabel("Watchlist")
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar(.hidden, for: .navigationBar)
@@ -69,8 +69,8 @@ struct LivePricesView: View {
                 // Fallback on earlier versions
                 WatchListView()
                     .tabItem {
-                        Label("Watch List", systemImage: "star")
-                            .accessibilityLabel("Watch List")
+                        Label("Watchlist", systemImage: "star")
+                            .accessibilityLabel("Watchlist")
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(true)

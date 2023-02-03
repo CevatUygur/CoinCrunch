@@ -29,11 +29,15 @@ struct ApperanceModeSwitchView: View {
             .edgesIgnoringSafeArea(.all)
             .background(Color.theme.background)
             .onAppear {
+                UITabBar.hideTabBar(animated: false)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     withAnimation {
                         manager.showAppearanceSwitchView = false
                     }
                 }
+            }
+            .onDisappear {
+                UITabBar.showTabBar(animated: false)
             }
         }
     }

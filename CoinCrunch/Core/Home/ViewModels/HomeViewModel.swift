@@ -16,6 +16,8 @@ class HomeViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var sortOption: SortOption = .rank
     
+    @Published var watchListCoins: [CoinModel] = [] //<- watchlist
+    
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
     private let portfolioDataService = PortfolioDataService()

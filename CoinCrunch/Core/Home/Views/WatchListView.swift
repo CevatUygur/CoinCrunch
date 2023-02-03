@@ -24,7 +24,7 @@ struct WatchListView: View {
                 Text("Sample Added Coin")
             }
             .listStyle(.grouped)
-            .navigationTitle("Watch List")
+            .navigationTitle("Watchlist")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
