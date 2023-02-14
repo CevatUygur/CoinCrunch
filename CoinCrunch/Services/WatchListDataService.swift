@@ -12,9 +12,9 @@ class WatchListDataService {
     
     private let container: NSPersistentContainer
     private let containerName: String = "PortfolioContainer"
-    private let entityName: String = "PortfolioEntity"
+    private let entityName: String = "WatchListEntity"
     
-    @Published var savedEntities: [PortfolioEntity] = []
+    @Published var savedEntities: [WatchListEntity] = []
     
     init() {
         container = NSPersistentContainer(name: containerName)
@@ -22,51 +22,56 @@ class WatchListDataService {
             if let error = error {
                 print("Error loading Core Data! \(error)")
             }
-            self.getPortfolio()
+            self.getWatchList()
         }
     }
     
     // MARK: - Public
     
-    func updatePortfolio(coin: CoinModel, amount: Double) {
+    func updatePortfolio(coin: CoinModel) {
         
         // check if coin is already in portfolio
         if let entity = savedEntities.first(where: { $0.coinID == coin.id }) {
-            if amount > 0 {
-                update(entity: entity, amount: amount)
-            } else {
-                delete(entity: entity)
-            }
+            delete(entity: entity)
         } else {
-            add(coin: coin, amount: amount)
+            add(coin: coin)
+        }
+    }
+    
+    func checkWatchList(coin: CoinModel) -> Bool {
+        
+        // check if coin is already in portfolio
+        if savedEntities.first(where: { $0.coinID == coin.id }) != nil {
+            return true
+        } else {
+            return false
         }
     }
     
     
     // MARK: - Private
     
-    private func getPortfolio() {
-        let request = NSFetchRequest<PortfolioEntity>(entityName: entityName)
+    private func getWatchList() {
+        let request = NSFetchRequest<WatchListEntity>(entityName: entityName)
         do {
             savedEntities = try container.viewContext.fetch(request)
         } catch let error {
-            print("Error fetching Portfolio Entities. \(error)")
+            print("Error fetching Watchlist Entities. \(error)")
         }
     }
     
-    private func add(coin: CoinModel, amount: Double) {
-        let entity = PortfolioEntity(context: container.viewContext)
+    private func add(coin: CoinModel) {
+        let entity = WatchListEntity(context: container.viewContext)
         entity.coinID = coin.id
-        entity.amount = amount
         applyChanges()
     }
     
-    private func update(entity: PortfolioEntity, amount: Double) {
-        entity.amount = amount
-        applyChanges()
-    }
+//    private func update(entity: WatchListEntity, amount: Double) {
+//        entity.amount = amount
+//        applyChanges()
+//    }
     
-    private func delete(entity: PortfolioEntity) {
+    private func delete(entity: WatchListEntity) {
         container.viewContext.delete(entity)
         applyChanges()
     }
@@ -81,7 +86,7 @@ class WatchListDataService {
     
     private func applyChanges() {
         save()
-        getPortfolio()
+        getWatchList()
     }
     
 }

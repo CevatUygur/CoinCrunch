@@ -75,6 +75,13 @@ extension DetailView {
     
     private var navigationBarTrailingItems: some View {
         HStack {
+            Button {
+                //check watchList
+            } label: {
+                //check watchList
+                Image(systemName: "star")
+            }
+
             Text(vm.coin.symbol.uppercased())
                 .font(.headline)
             .foregroundColor(Color.theme.secondaryText)
