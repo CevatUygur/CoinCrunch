@@ -21,6 +21,7 @@ class HomeViewModel: ObservableObject {
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
     private let portfolioDataService = PortfolioDataService()
+    private let watchListDataService = WatchListDataService()
     private var cancellables = Set<AnyCancellable>()
     
     enum SortOption {
@@ -54,6 +55,17 @@ class HomeViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
+        // updates portfolio coins
+        $allCoins
+            .combineLatest(watchListDataService.$savedEntities)
+            .map(mapAllCoinsToWatchListCoins)
+            .sink { [weak self] (returnedCoins) in
+                guard let self = self else { return }
+                self.watchListCoins = self.sortPortfolioCoinsIfNeeded(coins: returnedCoins)
+            }
+            .store(in: &cancellables)
+        
+        
         // updates marketData
         marketDataService.$marketData
             .combineLatest($portfolioCoins)
@@ -68,10 +80,18 @@ class HomeViewModel: ObservableObject {
         portfolioDataService.updatePortfolio(coin: coin, amount: amount)
     }
     
+    func checkWatchList(coin: CoinModel) -> Bool {
+        watchListDataService.checkWatchList(coin: coin)
+    }
+    
+    func updateWatchList(coin: CoinModel) {
+        watchListDataService.updateWatchList(coin: coin)
+    }
+    
     func reloadData() {
         coinDataService.getCoins()
         marketDataService.getData()
-        print("DEBUG: Successfully refreshed data...")
+        print("DEBUG: Successfully refreshed watchList data...")
     }
     
     private func filterAndSortCoins(text: String, coins: [CoinModel], sort: SortOption) -> [CoinModel] {
@@ -120,6 +140,17 @@ class HomeViewModel: ObservableObject {
                     return nil
                 }
                 return coin.updateHoldings(amount: entity.amount)
+            }
+    }
+    
+    // for watchlist
+    private func mapAllCoinsToWatchListCoins(allCoins: [CoinModel], watchListEntities: [WatchListEntity]) -> [CoinModel] {
+        allCoins
+            .compactMap { (coin) -> CoinModel? in
+                guard let entity = watchListEntities.first(where: { $0.coinID == coin.id }) else {
+                    return nil
+                }
+                return coin.updateHoldings(amount: 0)
             }
     }
     

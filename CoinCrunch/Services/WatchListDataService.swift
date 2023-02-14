@@ -11,7 +11,7 @@ import CoreData
 class WatchListDataService {
     
     private let container: NSPersistentContainer
-    private let containerName: String = "PortfolioContainer"
+    private let containerName: String = "WatchListContainer"
     private let entityName: String = "WatchListEntity"
     
     @Published var savedEntities: [WatchListEntity] = []
@@ -28,9 +28,8 @@ class WatchListDataService {
     
     // MARK: - Public
     
-    func updatePortfolio(coin: CoinModel) {
+    func updateWatchList(coin: CoinModel) {
         
-        // check if coin is already in portfolio
         if let entity = savedEntities.first(where: { $0.coinID == coin.id }) {
             delete(entity: entity)
         } else {
@@ -64,6 +63,7 @@ class WatchListDataService {
         let entity = WatchListEntity(context: container.viewContext)
         entity.coinID = coin.id
         applyChanges()
+        print("add function executed")
     }
     
 //    private func update(entity: WatchListEntity, amount: Double) {
@@ -79,6 +79,7 @@ class WatchListDataService {
     private func save(){
         do {
             try container.viewContext.save()
+            print("Save function executed")
         } catch let error {
             print("Error saving to Core Data. \(error)")
         }

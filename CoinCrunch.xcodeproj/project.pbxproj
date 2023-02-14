@@ -28,6 +28,7 @@
 		CFDC074429859103009E58E3 /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = CFDC074329859102009E58E3 /* settings.json */; };
 		CFE36BF029899D0100591389 /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE36BEF29899D0100591389 /* WatchListView.swift */; };
 		CFE36BF22989A3EB00591389 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE36BF12989A3EB00591389 /* NewsView.swift */; };
+		CFEC605A299C3EF500D29981 /* WatchListContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CFEC6058299C3EF500D29981 /* WatchListContainer.xcdatamodeld */; };
 		CFF44F67298464080042270A /* ColorSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F66298464080042270A /* ColorSchemeManager.swift */; };
 		CFF44F69298477DE0042270A /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F68298477DE0042270A /* MenuView.swift */; };
 		CFF44F6B29847EF20042270A /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF44F6A29847EF20042270A /* PortfolioView.swift */; };
@@ -88,6 +89,7 @@
 		CFDC074329859102009E58E3 /* settings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settings.json; sourceTree = "<group>"; };
 		CFE36BEF29899D0100591389 /* WatchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListView.swift; sourceTree = "<group>"; };
 		CFE36BF12989A3EB00591389 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
+		CFEC6059299C3EF500D29981 /* WatchListContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchListContainer.xcdatamodel; sourceTree = "<group>"; };
 		CFF44F66298464080042270A /* ColorSchemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeManager.swift; sourceTree = "<group>"; };
 		CFF44F68298477DE0042270A /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		CFF44F6A29847EF20042270A /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				CFF88A99297C5FD2009384CE /* StatisticModel.swift */,
 				CFF88A9F297C6953009384CE /* MarketDataModel.swift */,
 				CFF88AAA297D4390009384CE /* PortfolioContainer.xcdatamodeld */,
+				CFEC6058299C3EF500D29981 /* WatchListContainer.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				CFF88A6D2978A5E5009384CE /* Color.swift in Sources */,
 				CFF88A96297C4FBC009384CE /* SearchBarView.swift in Sources */,
 				CFF88A8B2979679A009384CE /* NetworkingManager.swift in Sources */,
+				CFEC605A299C3EF500D29981 /* WatchListContainer.xcdatamodeld in Sources */,
 				CFF88AA8297C9CF5009384CE /* CoinLogoView.swift in Sources */,
 				CFF88A9E297C64FA009384CE /* HomeStatsView.swift in Sources */,
 				CFF88AA2297C6D0B009384CE /* MarketDataService.swift in Sources */,
@@ -784,6 +788,16 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
+		CFEC6058299C3EF500D29981 /* WatchListContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CFEC6059299C3EF500D29981 /* WatchListContainer.xcdatamodel */,
+			);
+			currentVersion = CFEC6059299C3EF500D29981 /* WatchListContainer.xcdatamodel */;
+			path = WatchListContainer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		CFF88AAA297D4390009384CE /* PortfolioContainer.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

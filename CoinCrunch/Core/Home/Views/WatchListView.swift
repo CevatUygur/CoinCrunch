@@ -20,12 +20,9 @@ struct WatchListView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                Text("Sample Added Coin")
-            }
-            .listStyle(.grouped)
-            .navigationTitle("Watchlist")
-            .navigationBarTitleDisplayMode(.inline)
+            watchListBodyView
+                .navigationTitle("Watchlist")
+                .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
@@ -44,19 +41,13 @@ extension WatchListView {
     private var watchListBodyView: some View {
         ZStack {
             VStack {
-                watchListHeader
-                HomeStatsView(showPortfolio: false)
-                SearchBarView(searchText: $vm.searchText)
 
-                columnTitles
+                //columnTitles
 
                 allCoinsList
                     .transition(.move(edge: .leading))
 
                 Spacer(minLength: 0)
-            }
-            .sheet(isPresented: $showSettingsView) {
-                SettingsView()
             }
         }
         .background(
@@ -84,7 +75,7 @@ extension WatchListView {
 
     private var allCoinsList: some View {
         List {
-            ForEach(vm.allCoins) { coin in
+            ForEach(vm.watchListCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: false)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                     .onTapGesture {

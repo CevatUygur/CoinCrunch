@@ -22,6 +22,7 @@ struct DetailLoadingView: View {
 
 struct DetailView: View {
     
+    @EnvironmentObject private var homevm: HomeViewModel
     @StateObject private var vm: DetailViewModel
     @State private var showFullDescription: Bool = false
     private let columns: [GridItem] = [
@@ -54,7 +55,7 @@ struct DetailView: View {
                 .padding()
             }
         }
-        .navigationBarTitle(vm.coin.name)
+        .navigationBarTitle(vm.coin.name, displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 navigationBarTrailingItems
@@ -76,12 +77,16 @@ extension DetailView {
     private var navigationBarTrailingItems: some View {
         HStack {
             Button {
-                //check watchList
+                homevm.updateWatchList(coin: vm.coin)
             } label: {
                 //check watchList
-                Image(systemName: "star")
-            }
+                if homevm.checkWatchList(coin: vm.coin) {
+                    Image(systemName: "star.fill")
+                } else {
+                    Image(systemName: "star")
+                }
 
+            }
             Text(vm.coin.symbol.uppercased())
                 .font(.headline)
             .foregroundColor(Color.theme.secondaryText)
