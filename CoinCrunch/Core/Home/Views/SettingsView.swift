@@ -10,15 +10,9 @@ import SwiftUI
 struct SettingsView: View {
     
     @ObservedObject var manager: ColorSchemeManager
-    
     @Environment(\.colorScheme) var current
     @EnvironmentObject var csManager: ColorSchemeManager
-    @EnvironmentObject private var vm: HomeViewModel
-    @State private var showPortfolioView: Bool = false // <- new sheet
-    @State private var selectedCoin: CoinModel?
-    @State private var showDetailView: Bool = false
-    @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         
         NavigationView {
@@ -27,9 +21,7 @@ struct SettingsView: View {
                     Text("About")
                 }
                 
-                Section(header: Text("appearance"), footer: Text("If you choose Device settings, this app will use the mode that's already selected in the device's settings.")) {
-                    AppearanceSelectionPicker
-                }
+                AppearanceView
             }
             .listStyle(.grouped)
             .navigationTitle("Settings")
@@ -45,13 +37,19 @@ struct SettingsView: View {
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            //MenuView()
+            SettingsView(manager: ColorSchemeManager())
         }
-        .environmentObject(dev.homeVM)
+        .environmentObject(dev.csManager)
     }
 }
 
 extension SettingsView {
+    
+    private var AppearanceView: some View {
+        Section(header: Text("appearance"), footer: Text("If you choose Device settings, this app will use the mode that's already selected in the device's settings.")) {
+            AppearanceSelectionPicker
+        }
+    }
     
     private var AppearanceSelectionPicker: some View {
 

@@ -64,10 +64,6 @@ extension WatchListView {
                 .fontWeight(.heavy)
                 .foregroundColor(Color.theme.accent)
             Spacer()
-            //CircleButtonView(iconName: "info")
-//                .onTapGesture {
-//                    showPortfolioView.toggle()
-//                }
         }
         .padding(.horizontal)
         .padding(.top, 19)
