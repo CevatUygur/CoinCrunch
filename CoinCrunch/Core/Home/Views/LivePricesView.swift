@@ -96,19 +96,19 @@ struct LivePricesView: View {
             }
 
             if #available(iOS 16.0, *) {
-                MenuView(manager: manager)
+                SettingsView(manager: manager)
                     .tabItem {
-                        Label("Menu", systemImage: "line.3.horizontal")
-                            .accessibilityLabel("Menu")
+                        Label("Settings", systemImage: "gear")
+                            .accessibilityLabel("Settings")
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar(.hidden, for: .navigationBar)
             } else {
                 // Fallback on earlier versions
-                MenuView(manager: manager)
+                SettingsView(manager: manager)
                     .tabItem {
-                        Label("Menu", systemImage: "line.3.horizontal")
-                            .accessibilityLabel("Menu")
+                        Label("Settings", systemImage: "gear")
+                            .accessibilityLabel("Settings")
                     }
                     
                     .navigationBarTitleDisplayMode(.inline)

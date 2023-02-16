@@ -54,9 +54,7 @@ extension NewsView {
 
                 Spacer(minLength: 0)
             }
-            .sheet(isPresented: $showSettingsView) {
-                SettingsView()
-            }
+
         }
         .background(
             NavigationLink(isActive: $showDetailView, destination: {
