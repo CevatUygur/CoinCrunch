@@ -119,14 +119,15 @@ struct LivePricesView: View {
     }
 }
 
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            //LivePricesView()
-//        }
-//        .environmentObject(dev.homeVM)
-//    }
-//}
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            LivePricesView(manager: ColorSchemeManager())
+        }
+        .environmentObject(dev.homeVM)
+        .environmentObject(dev.csManager)
+    }
+}
 
 extension LivePricesView {
 

@@ -12,12 +12,9 @@ struct WatchListView: View {
 
     @EnvironmentObject private var vm: HomeViewModel
 
-    @State private var showSettingsView: Bool = false // <- new sheet
     @State private var selectedCoin: CoinModel?
     @State private var showDetailView: Bool = false
     
-    @State private var showPortfolio: Bool = false
-
     var body: some View {
         NavigationView {
             watchListBodyView
@@ -33,6 +30,7 @@ struct WatchListView_Previews: PreviewProvider {
             WatchListView()
         }
         .environmentObject(dev.homeVM)
+        
     }
 }
 
@@ -41,8 +39,8 @@ extension WatchListView {
     private var watchListBodyView: some View {
         ZStack {
             VStack {
-
-                //columnTitles
+                Spacer(minLength: 12)
+                columnTitles
 
                 allCoinsList
                     .transition(.move(edge: .leading))

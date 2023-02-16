@@ -14,8 +14,6 @@ struct PortfolioView: View {
     @State private var selectedCoin: CoinModel?
     @State private var showDetailView: Bool = false
     
-    @State private var showPortfolio: Bool = false
-    
     var body: some View {
         portfolioBodyView
     }
