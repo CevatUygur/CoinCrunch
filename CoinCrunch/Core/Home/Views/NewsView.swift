@@ -13,7 +13,8 @@ struct NewsView: View {
     var body: some View {
         NavigationView {
             List {
-                Text("Sample New")
+                Text("Sample New 1")
+                Text("Sample New 2")
             }
             .listStyle(.grouped)
             .navigationTitle("News")
