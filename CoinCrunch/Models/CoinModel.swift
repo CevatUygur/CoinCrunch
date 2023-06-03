@@ -55,7 +55,7 @@ import Foundation
  */
 
 struct CoinModel: Identifiable, Codable {
-    let id, symbol, name: String
+    var id, symbol, name: String
     let image: String
     let currentPrice: Double
     let marketCap, marketCapRank: Double?
@@ -110,6 +110,11 @@ struct CoinModel: Identifiable, Codable {
     
     var rank: Int {
         return Int(marketCapRank ?? 0)
+    }
+    
+    var percentage24HoursUp: Bool {
+        return priceChangePercentage24H ?? 0 >= 0 ? true : false
+        
     }
 }
 
