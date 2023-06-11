@@ -16,13 +16,25 @@ struct PortfolioView: View {
     
     var body: some View {
         portfolioBodyView
+            .tabItem {
+                Label("Portfolio", systemImage: "chart.pie")
+                    .accessibilityLabel("Portfolio")
+            }
+            .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct PortfolioView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            PortfolioView()
+        Group {
+            NavigationView {
+                PortfolioView()
+                    .preferredColorScheme(.light)
+            }
+            NavigationView {
+                PortfolioView()
+                    .preferredColorScheme(.dark)
+            }
         }
         .environmentObject(dev.homeVM)
     }
@@ -43,20 +55,21 @@ extension PortfolioView {
             // content layer
             VStack {
                 profileHeader
-                HomeStatsView(showPortfolio: true)
+                
+                HomeStatsView()
+                    .frame(width: UIScreen.main.bounds.width, alignment: .trailing)
+               
                 SearchBarView(searchText: $vm.searchText)
                 columnTitles
                 
                 portfolioCoinsList
-                    .transition(.move(edge: .trailing))
                 
                 Spacer(minLength: 0)
             }
-
         }
         .background(
             NavigationLink(isActive: $showDetailView, destination: {
-                DetailLoadingView(coin: $selectedCoin)
+                CoinDetailLoadingView(coin: $selectedCoin)
             }, label: { EmptyView() })
         )
     }
@@ -72,7 +85,6 @@ extension PortfolioView {
                 .onTapGesture {
                     showPortfolioView.toggle()
                 }
-
         }
         .padding(.horizontal)
     }
@@ -89,7 +101,7 @@ extension PortfolioView {
         }
         .listStyle(PlainListStyle())
         .refreshable {
-            vm.reloadData()
+            vm.reloadCoinData()
         }
     }
 
@@ -98,42 +110,38 @@ extension PortfolioView {
             HStack(spacing: 4) {
                 Text("Coin")
                 Image(systemName: "chevron.down")
-                    .opacity((vm.sortOption == .rank || vm.sortOption == .rankReversed) ? 1.0 : 0.0)
-                    .rotationEffect(Angle(degrees: vm.sortOption == .rank ? 0 : 180))
+                    .opacity((vm.sortCoinsOption == .rank || vm.sortCoinsOption == .rankReversed) ? 1.0 : 0.0)
+                    .rotationEffect(Angle(degrees: vm.sortCoinsOption == .rank ? 0 : 180))
             }
             .onTapGesture {
                 withAnimation(.default) {
-                    vm.sortOption = vm.sortOption == .rank ? .rankReversed : .rank
+                    vm.sortCoinsOption = vm.sortCoinsOption == .rank ? .rankReversed : .rank
                 }
             }
-
             Spacer()
-
             HStack(spacing: 4) {
                 Text("Holdings")
                 Image(systemName: "chevron.down")
-                    .opacity((vm.sortOption == .holdings || vm.sortOption == .holdingsReversed) ? 1.0 : 0.0)
-                    .rotationEffect(Angle(degrees: vm.sortOption == .holdings ? 0 : 180))
+                    .opacity((vm.sortCoinsOption == .holdings || vm.sortCoinsOption == .holdingsReversed) ? 1.0 : 0.0)
+                    .rotationEffect(Angle(degrees: vm.sortCoinsOption == .holdings ? 0 : 180))
             }
             .onTapGesture {
                 withAnimation(.default) {
-                    vm.sortOption = vm.sortOption == .holdings ? .holdingsReversed : .holdings
+                    vm.sortCoinsOption = vm.sortCoinsOption == .holdings ? .holdingsReversed : .holdings
                 }
             }
-
             HStack(spacing: 4) {
                 Text("Current Price")
                 Image(systemName: "chevron.down")
-                    .opacity((vm.sortOption == .price || vm.sortOption == .priceReversed) ? 1.0 : 0.0)
-                    .rotationEffect(Angle(degrees: vm.sortOption == .price ? 0 : 180))
+                    .opacity((vm.sortCoinsOption == .price || vm.sortCoinsOption == .priceReversed) ? 1.0 : 0.0)
+                    .rotationEffect(Angle(degrees: vm.sortCoinsOption == .price ? 0 : 180))
             }
             .frame(width: UIScreen.main.bounds.width / 3.2, alignment: .trailing)
             .onTapGesture {
                 withAnimation(.default) {
-                    vm.sortOption = vm.sortOption == .price ? .priceReversed : .price
+                    vm.sortCoinsOption = vm.sortCoinsOption == .price ? .priceReversed : .price
                 }
             }
-
         }
         .font(.caption)
         .foregroundColor(Color.theme.secondaryText)

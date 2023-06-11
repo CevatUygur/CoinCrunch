@@ -47,8 +47,8 @@ struct ChartView: View {
         .font(.caption)
         .foregroundColor(Color.theme.secondaryText)
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                withAnimation(.linear(duration: 1.0)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                withAnimation(.linear(duration: 0.7)) {
                     percentage = 1.0
                 }
             }
@@ -58,7 +58,12 @@ struct ChartView: View {
 
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView(coin: dev.coin)
+        Group {
+            ChartView(coin: dev.coin)
+                .preferredColorScheme(.light)
+            ChartView(coin: dev.coin)
+                .preferredColorScheme(.dark)
+        }
     }
 }
 

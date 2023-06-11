@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Lottie
 
 struct WatchListView: View {
 
@@ -21,16 +20,23 @@ struct WatchListView: View {
                 .navigationTitle("Watchlist")
                 .navigationBarTitleDisplayMode(.inline)
         }
+        .tabItem {
+            Label("Watchlist", systemImage: "star")
+                .accessibilityLabel("Watchlist")
+        }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct WatchListView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        Group {
             WatchListView()
+                .preferredColorScheme(.light)
+            WatchListView()
+                .preferredColorScheme(.dark)
         }
         .environmentObject(dev.homeVM)
-        
     }
 }
 
@@ -41,32 +47,17 @@ extension WatchListView {
             VStack {
                 Spacer(minLength: 12)
                 columnTitles
-
                 allCoinsList
-                    .transition(.move(edge: .leading))
-
                 Spacer(minLength: 0)
             }
         }
         .background(
             NavigationLink(isActive: $showDetailView, destination: {
-                DetailLoadingView(coin: $selectedCoin)
+                CoinDetailLoadingView(coin: $selectedCoin)
             }, label: { EmptyView() })
         )
     }
-
-    private var watchListHeader: some View {
-        HStack {
-            Text("Watch List")
-                .font(.title)
-                .fontWeight(.heavy)
-                .foregroundColor(Color.theme.accent)
-            Spacer()
-        }
-        .padding(.horizontal)
-        .padding(.top, 19)
-    }
-
+    
     private var allCoinsList: some View {
         List {
             ForEach(vm.watchListCoins) { coin in
@@ -79,7 +70,7 @@ extension WatchListView {
         }
         .listStyle(PlainListStyle())
         .refreshable {
-            vm.reloadData()
+            vm.reloadCoinData()
         }
     }
 
@@ -88,30 +79,27 @@ extension WatchListView {
             HStack(spacing: 4) {
                 Text("Coin")
                 Image(systemName: "chevron.down")
-                    .opacity((vm.sortOption == .rank || vm.sortOption == .rankReversed) ? 1.0 : 0.0)
-                    .rotationEffect(Angle(degrees: vm.sortOption == .rank ? 0 : 180))
+                    .opacity((vm.sortCoinsOption == .rank || vm.sortCoinsOption == .rankReversed) ? 1.0 : 0.0)
+                    .rotationEffect(Angle(degrees: vm.sortCoinsOption == .rank ? 0 : 180))
             }
             .onTapGesture {
                 withAnimation(.default) {
-                    vm.sortOption = vm.sortOption == .rank ? .rankReversed : .rank
+                    vm.sortCoinsOption = vm.sortCoinsOption == .rank ? .rankReversed : .rank
                 }
             }
-
             Spacer()
-
             HStack(spacing: 4) {
                 Text("Current Price")
                 Image(systemName: "chevron.down")
-                    .opacity((vm.sortOption == .price || vm.sortOption == .priceReversed) ? 1.0 : 0.0)
-                    .rotationEffect(Angle(degrees: vm.sortOption == .price ? 0 : 180))
+                    .opacity((vm.sortCoinsOption == .price || vm.sortCoinsOption == .priceReversed) ? 1.0 : 0.0)
+                    .rotationEffect(Angle(degrees: vm.sortCoinsOption == .price ? 0 : 180))
             }
             .frame(width: UIScreen.main.bounds.width / 3.2, alignment: .trailing)
             .onTapGesture {
                 withAnimation(.default) {
-                    vm.sortOption = vm.sortOption == .price ? .priceReversed : .price
+                    vm.sortCoinsOption = vm.sortCoinsOption == .price ? .priceReversed : .price
                 }
             }
-
         }
         .font(.caption)
         .foregroundColor(Color.theme.secondaryText)
@@ -122,6 +110,4 @@ extension WatchListView {
         selectedCoin = coin
         showDetailView.toggle()
     }
-
 }
-

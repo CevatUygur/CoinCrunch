@@ -33,8 +33,13 @@ struct CoinImageView: View {
 
 struct CoinImageView_Previews: PreviewProvider {
     static var previews: some View {
-        CoinImageView(coin: dev.coin)
-            .padding()
-            .previewLayout(.sizeThatFits)
+        Group {
+            CoinImageView(coin: dev.coin)
+                .preferredColorScheme(.light)
+            CoinImageView(coin: dev.coin)
+                .preferredColorScheme(.dark)
+        }
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }

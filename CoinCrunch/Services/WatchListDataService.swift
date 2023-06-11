@@ -66,11 +66,6 @@ class WatchListDataService {
         print("add function executed")
     }
     
-//    private func update(entity: WatchListEntity, amount: Double) {
-//        entity.amount = amount
-//        applyChanges()
-//    }
-    
     private func delete(entity: WatchListEntity) {
         container.viewContext.delete(entity)
         applyChanges()

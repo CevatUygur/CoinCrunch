@@ -6,6 +6,7 @@ target 'CoinCrunch' do
   use_frameworks!
 
   # Pods for CoinCrunch
-pod 'lottie-ios'
+pod 'SDWebImage'
+pod 'SDWebImageSwiftUI'
 
 end

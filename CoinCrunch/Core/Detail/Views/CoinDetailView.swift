@@ -7,23 +7,23 @@
 
 import SwiftUI
 
-struct DetailLoadingView: View {
+struct CoinDetailLoadingView: View {
     
     @Binding var coin: CoinModel?
     
     var body: some View {
         ZStack {
             if let coin = coin {
-                DetailView(coin: coin)
+                CoinDetailView(coin: coin)
             }
         }
     }
 }
 
-struct DetailView: View {
+struct CoinDetailView: View {
     
     @EnvironmentObject private var homevm: HomeViewModel
-    @StateObject private var vm: DetailViewModel
+    @StateObject private var vm: CoinDetailViewModel
     @State private var showFullDescription: Bool = false
     private let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -32,7 +32,7 @@ struct DetailView: View {
     private let spacing: CGFloat = 20
     
     init(coin: CoinModel) {
-        _vm = StateObject(wrappedValue: DetailViewModel(coin: coin))
+        _vm = StateObject(wrappedValue: CoinDetailViewModel(coin: coin))
     }
     
     var body: some View {
@@ -64,15 +64,23 @@ struct DetailView: View {
     }
 }
 
-struct DetailView_Previews: PreviewProvider {
+struct CoinDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            DetailView(coin: dev.coin)
+        Group {
+            NavigationView {
+                CoinDetailView(coin: dev.coin)
+                    .preferredColorScheme(.light)
+            }
+            NavigationView {
+                CoinDetailView(coin: dev.coin)
+                    .preferredColorScheme(.dark)
+            }
         }
+        .environmentObject(dev.homeVM)
     }
 }
 
-extension DetailView {
+extension CoinDetailView {
     
     private var navigationBarTrailingItems: some View {
         HStack {

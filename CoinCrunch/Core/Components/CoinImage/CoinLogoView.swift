@@ -34,11 +34,10 @@ struct CoinLogoView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             CoinLogoView(coin: dev.coin)
-                .previewLayout(.sizeThatFits)
-            
+                .preferredColorScheme(.light)
             CoinLogoView(coin: dev.coin)
-                .previewLayout(.sizeThatFits)
                 .preferredColorScheme(.dark)
         }
+        .previewLayout(.sizeThatFits)
     }
 }

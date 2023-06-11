@@ -14,7 +14,6 @@ struct SettingsView: View {
     @EnvironmentObject var csManager: ColorSchemeManager
 
     var body: some View {
-        
         NavigationView {
             List {
                 Section(header: Text("general")) {
@@ -31,13 +30,25 @@ struct SettingsView: View {
             ApperanceModeSwitchView(manager: manager)
         }
         .statusBarHidden(manager.showAppearanceSwitchView)
+        .tabItem {
+            Label("Settings", systemImage: "gear")
+                .accessibilityLabel("Settings")
+        }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-struct MenuView_Previews: PreviewProvider {
+struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            SettingsView(manager: ColorSchemeManager())
+        Group {
+            NavigationView {
+                SettingsView(manager: ColorSchemeManager())
+                    .preferredColorScheme(.light)
+            }
+            NavigationView {
+                SettingsView(manager: ColorSchemeManager())
+                    .preferredColorScheme(.dark)
+            }
         }
         .environmentObject(dev.csManager)
     }

@@ -29,12 +29,11 @@ struct CircleButtonView: View {
 struct CircleButtonView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CircleButtonView(iconName: "line.3.horizontal")
-                .previewLayout(.sizeThatFits)
-            
+            CircleButtonView(iconName: "info")
+                .preferredColorScheme(.light)
             CircleButtonView(iconName: "plus")
-                .previewLayout(.sizeThatFits)
                 .preferredColorScheme(.dark)
         }
+        .previewLayout(.sizeThatFits)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// CoinGecko API info
+// API Info
 
 /*
 

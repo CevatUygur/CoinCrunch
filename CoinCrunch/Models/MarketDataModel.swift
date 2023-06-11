@@ -7,7 +7,8 @@
 
 import Foundation
 
-// JSON data:
+// API Info
+
 /*
  
  URL: https://api.coingecko.com/api/v3/global

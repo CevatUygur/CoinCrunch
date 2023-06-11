@@ -19,7 +19,6 @@ struct StatisticView: View {
             Text(stat.value)
                 .font(.headline)
                 .foregroundColor(Color.theme.accent)
-                
             HStack(spacing: 4) {
                 Image(systemName: "triangle.fill")
                     .font(.caption)
@@ -39,13 +38,12 @@ struct StatisticView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             StatisticView(stat: dev.stat1)
-                .previewLayout(.sizeThatFits)
-                .preferredColorScheme(.dark)
+                .preferredColorScheme(.light)
             StatisticView(stat: dev.stat2)
-                .previewLayout(.sizeThatFits)
+                .preferredColorScheme(.dark)
             StatisticView(stat: dev.stat3)
-                .previewLayout(.sizeThatFits)
                 .preferredColorScheme(.dark)
         }
+        .previewLayout(.sizeThatFits)
     }
 }

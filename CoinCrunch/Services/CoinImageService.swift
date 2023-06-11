@@ -53,6 +53,4 @@ class CoinImageService {
                 self.fileManager.saveImage(image: downloadedImage, imageName: self.imageName, folderName: self.folderName)
             })
     }
-    
-    
 }

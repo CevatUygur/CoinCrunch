@@ -13,6 +13,13 @@ extension String {
         return self.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
     }
     
+    var formattingNewsCategoriesString: String {
+        return self.replacingOccurrences(of: "|", with: " | ", options: .literal, range: nil).uppercased()
+    }
+    
+    var formattingNewsTagsString: String {
+        return self.replacingOccurrences(of: "|", with: ", ", options: .literal, range: nil).capitalized
+    }
     
     /// Truncates any string to defined length and adds ... to end.
     /// ```
@@ -21,7 +28,6 @@ extension String {
     func trunc(length: Int, trailing: String = "…") -> String {
         return (self.count > length) ? self.prefix(length) + trailing : self
     }
-    
 }
 
 

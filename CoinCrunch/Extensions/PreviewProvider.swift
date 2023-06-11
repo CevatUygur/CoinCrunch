@@ -198,4 +198,6 @@ class DeveloperPreview {
         20792.951370835992,
         20831.950823406285
     ]), priceChangePercentage24HInCurrency: -2.1093454742392206, currentHoldings: 1.5)
+    
+    let new = News(id: "13610804", guid: "https://www.cryptopolitan.com/?p=315028", publishedOn: 1686203160, imageurl: "https://images.cryptocompare.com/news/default/cryptopolitan.png", title: "Cardano Foundation Disputes SEC’s Security Classification; Robinhood Considers Delisting ADA", url: "https://www.cryptopolitan.com/cardano-foundation-robinhood-delisting-ada/", body: "The cryptocurrency market is facing regulatory hurdles and compliance concerns in the United States, particularly impacting Cardano (ADA), Solana (SOL), and Polygon (MATIC). In a recent lawsuit against Binance, the United States Securities and Exchange Commission (SEC) classified several prominent cryptocurrencies, including Cardano, as securities. However, the Cardano Foundation’s CEO disagrees with this classification, highlighting ... Read more", tags: "Cardano News", lang: "EN", upvotes: "0", downvotes: "0", categories: "ADA|ETH|EXCHANGE|MATIC|REGULATION", sourceInfo: SourceInfo(name: "Cryptopolitan", img: "https://images.cryptocompare.com/news/default/cryptopolitan.png", lang: "EN"), source: "cryptopolitan")
 }

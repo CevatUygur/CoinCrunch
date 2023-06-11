@@ -53,8 +53,14 @@ struct ApperanceModeSwitchView: View {
     }
 }
 
-//struct DenemeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        //DenemeView()
-//    }
-//}
+struct DenemeView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            ApperanceModeSwitchView(manager: ColorSchemeManager())
+                .preferredColorScheme(.light)
+            ApperanceModeSwitchView(manager: ColorSchemeManager())
+                .preferredColorScheme(.dark)
+        }
+        .environmentObject(dev.csManager)
+    }
+}

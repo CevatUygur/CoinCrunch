@@ -50,7 +50,7 @@ struct EditPortfolioView: View {
             .navigationTitle("Edit Portfolio")
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    //XMarkButton(dismiss: _dismiss)
+                    XMarkButton(dismiss: _dismiss)
 
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -68,8 +68,13 @@ struct EditPortfolioView: View {
 
 struct EditPortfolioView_Previews: PreviewProvider {
     static var previews: some View {
-        EditPortfolioView()
-            .environmentObject(dev.homeVM)
+        Group {
+            EditPortfolioView()
+                .preferredColorScheme(.light)
+            EditPortfolioView()
+                .preferredColorScheme(.dark)
+        }
+        .environmentObject(dev.homeVM)
     }
 }
 

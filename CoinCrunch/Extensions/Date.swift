@@ -24,8 +24,23 @@ extension Date {
         return formatter
     }
     
+    private var dateAndTimeFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }
+    
     func asShortDateString() -> String {
         return shortFormatter.string(from: self)
+    }
+    
+    func dateAndTimeString() -> String {
+        return dateAndTimeFormatter.string(from: self)
+    }
+    
+    func timeIntervalToDateAndTimeString(timeIn: Int) -> String {
+        return Date(timeIntervalSince1970: TimeInterval(timeIn)).dateAndTimeString()
     }
     
 }
