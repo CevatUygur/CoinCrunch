@@ -20,60 +20,16 @@ struct LivePricesView: View {
     
     var body: some View {
         TabView(selection: $selectedItem) {
-            if #available(iOS 16.0, *) {
-                homeBodyView
-                    .toolbar(.hidden, for: .navigationBar)
-                    .tag(1)
-            } else {
-                // Fallback on earlier versions
-                homeBodyView
-                    .navigationBarHidden(true)
-                    .tag(1)
-            }
-
-            if #available(iOS 16.0, *) {
-                PortfolioView()
-                    .toolbar(.hidden, for: .navigationBar)
-                    .tag(2)
-            } else {
-                // Fallback on earlier versions
-                PortfolioView()
-                    .navigationBarHidden(true)
-                    .tag(2)
-            }
-            
-            if #available(iOS 16.0, *) {
-                WatchListView()
-                    .toolbar(.hidden, for: .navigationBar)
-                    .tag(3)
-            } else {
-                // Fallback on earlier versions
-                WatchListView()
-                    .navigationBarHidden(true)
-                    .tag(3)
-            }
-            
-            if #available(iOS 16.0, *) {
-                NewsView()
-                    .toolbar(.hidden, for: .navigationBar)
-                    .tag(4)
-            } else {
-                // Fallback on earlier versions
-                NewsView()
-                    .navigationBarHidden(true)
-                    .tag(4)
-            }
-
-            if #available(iOS 16.0, *) {
-                SettingsView(manager: manager)
-                    .toolbar(.hidden, for: .navigationBar)
-                    .tag(5)
-            } else {
-                // Fallback on earlier versions
-                SettingsView(manager: manager)
-                    .navigationBarHidden(true)
-                    .tag(5)
-            }
+            homeBodyView
+                .tag(1)
+            PortfolioView()
+                .tag(2)
+            WatchListView()
+                .tag(3)
+            NewsView()
+                .tag(4)
+            SettingsView(manager: manager)
+                .tag(5)
         }
         .accentColor(Color.theme.accent)
         .onChange(of: selectedItem) { value in
@@ -109,7 +65,6 @@ extension LivePricesView {
                 HomeStatsView()
                     .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                     
-                
                 SearchBarView(searchText: $vm.searchText)
                 columnTitles
                 allCoinsList
@@ -125,7 +80,6 @@ extension LivePricesView {
             Label("Live Prices", systemImage: "chart.line.uptrend.xyaxis")
                 .accessibilityLabel("Live Prices")
         }
-        .navigationBarTitleDisplayMode(.inline)
     }
 
     private var homeHeader: some View {
@@ -196,15 +150,5 @@ extension LivePricesView {
         selectedCoin = coin
         showDetailView.toggle()
     }
-
-
 }
 
-extension AnyTransition {
-    static var moveAndFade: AnyTransition {
-        .asymmetric(
-            insertion: .move(edge: .trailing).combined(with: .opacity),
-            removal: .scale.combined(with: .opacity)
-        )
-    }
-}

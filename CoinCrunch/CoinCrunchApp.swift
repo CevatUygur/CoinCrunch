@@ -17,11 +17,12 @@ struct CoinCrunchApp: App {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(Color.theme.accent)]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(Color.theme.accent)]
         UITabBar.appearance().backgroundColor = UIColor(Color.theme.background)
-        
+
         let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.configureWithOpaqueBackground()
         UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
-            UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        
     }
     
     var body: some Scene {

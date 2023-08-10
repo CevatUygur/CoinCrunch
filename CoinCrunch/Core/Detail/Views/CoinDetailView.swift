@@ -17,6 +17,8 @@ struct CoinDetailLoadingView: View {
                 CoinDetailView(coin: coin)
             }
         }
+        .navigationBarHidden(false)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -55,6 +57,7 @@ struct CoinDetailView: View {
                 .padding()
             }
         }
+        .navigationBarHidden(false)
         .navigationBarTitle(vm.coin.name, displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

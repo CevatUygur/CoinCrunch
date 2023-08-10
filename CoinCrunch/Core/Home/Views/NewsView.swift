@@ -17,6 +17,8 @@ struct NewsView: View {
     var body: some View {
         NavigationView {
             bodyView
+                .navigationTitle("News")
+                .navigationBarTitleDisplayMode(.inline)
         }
         .tabItem {
             Label("News", systemImage: "newspaper")
@@ -69,8 +71,6 @@ extension NewsView {
         .refreshable {
             vm.reloadNewsData()
         }
-        .navigationTitle("News")
-        .navigationBarTitleDisplayMode(.inline)
         .background(
             NavigationLink(isActive: $showDetailView, destination: {
                 NewsDetailLoadingView(new: $selectedNew)
