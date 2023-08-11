@@ -17,14 +17,12 @@ struct NewsView: View {
     var body: some View {
         NavigationView {
             bodyView
-                .navigationTitle("News")
-                .navigationBarTitleDisplayMode(.inline)
         }
         .tabItem {
             Label("News", systemImage: "newspaper")
                 .accessibilityLabel("News")
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.automatic)
     }
     
     private func segue(new: News) {
@@ -68,14 +66,16 @@ extension NewsView {
             .listRowSeparatorTint(Color.theme.secondaryText)
         }
         .listStyle(PlainListStyle())
-        .refreshable {
-            vm.reloadNewsData()
-        }
+        .navigationTitle("News")
+        .navigationBarTitleDisplayMode(.automatic)
         .background(
             NavigationLink(isActive: $showDetailView, destination: {
                 NewsDetailLoadingView(new: $selectedNew)
             }, label: { EmptyView() })
         )
+        .refreshable {
+            vm.reloadNewsData()
+        }
     }
 }
 

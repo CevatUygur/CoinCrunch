@@ -9,22 +9,34 @@ import SwiftUI
 
 struct WatchListView: View {
 
-    @EnvironmentObject private var vm: HomeViewModel
+    //@Environment(\.dismiss) var dismiss
+    @State private var showAddToWatchListView: Bool = false // <- new sheet
+    @EnvironmentObject private var homevm: HomeViewModel
 
     @State private var selectedCoin: CoinModel?
     @State private var showDetailView: Bool = false
+    
+    @State private var animationsRunning = false
     
     var body: some View {
         NavigationView {
             watchListBodyView
                 .navigationTitle("Watchlist")
-                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleDisplayMode(.automatic)
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Image(systemName: "plus")
+                            .onTapGesture {
+                                showAddToWatchListView.toggle()
+                            }
+                    }
+                })
         }
         .tabItem {
-            Label("Watchlist", systemImage: "star")
+            Label("Watchlist", systemImage: "star.fill")
                 .accessibilityLabel("Watchlist")
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.automatic)
     }
 }
 
@@ -45,10 +57,17 @@ extension WatchListView {
     private var watchListBodyView: some View {
         ZStack {
             VStack {
-                Spacer(minLength: 12)
-                columnTitles
-                allCoinsList
-                Spacer(minLength: 0)
+                if homevm.watchListCoins.isEmpty {
+                    emptyView
+                        .sheet(isPresented: $showAddToWatchListView) {
+                            EditPortfolioView()
+                                .environmentObject(homevm)
+                        }
+                } else {
+                    Spacer(minLength: 12)
+                    columnTitles
+                    watchListCoinsView
+                }
             }
         }
         .background(
@@ -58,9 +77,95 @@ extension WatchListView {
         )
     }
     
-    private var allCoinsList: some View {
+    private var emptyView: some View {
+        VStack {
+            VStack{
+                
+                if #available(iOS 17.0, *) {
+                    Image(systemName: "doc.text.magnifyingglass")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 180, height: 180)
+                        .symbolEffect(.bounce.up.byLayer, value: animationsRunning)
+                } else {
+                    Image(systemName: "doc.text.magnifyingglass")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                }
+                
+                VStack(spacing: 24) {
+                    
+                    Text("Find and follow your winning coins")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                    
+                    VStack(alignment: .leading, spacing: 12) {
+                        
+                        HStack {
+                            Image(systemName: "star.fill")
+                            Text("Choose your favorite coins")
+                        }
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        
+                        HStack {
+                            Image(systemName: "newspaper.fill")
+                            Text("Get relevant news updates [SOON]")
+                        }
+                        .font(.subheadline)
+
+                        HStack {
+                            Image(systemName: "bell.badge.fill")
+                            Text("Receive real-time alerts [SOON]")
+                        }
+                        .font(.subheadline)
+                    }
+                }
+                .padding(.top, 24)
+            }
+            
+            Button {
+                showAddToWatchListView.toggle()
+            } label: {
+                Text("Get Started")
+                    .fontWeight(.semibold)
+                    .frame(width: 320, height: 52)
+                    .background(Color.theme.yellow)
+                    .foregroundStyle(Color.black)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+            .padding(.top, 24)
+        }
+        .onAppear{
+            animationsRunning.toggle()
+        }
+    }
+    
+    private var watchListCoinsView: some View {
         List {
-            ForEach(vm.watchListCoins) { coin in
+            ForEach(homevm.watchListCoins) { coin in
+                CoinRowView(coin: coin, showHoldingsColumn: false)
+                    .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                    .onTapGesture {
+                        segue(coin: coin)
+                    }
+            }
+            .onDelete { indexSet in
+                for index in indexSet{
+                    homevm.updateWatchList(coin: homevm.watchListCoins[index])
+                }
+            }
+        }
+        .listStyle(PlainListStyle())
+        .refreshable {
+            homevm.reloadCoinData()
+        }
+    }
+    
+    private var allCoinsView: some View {
+        List {
+            ForEach(homevm.allCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: false)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                     .onTapGesture {
@@ -70,7 +175,7 @@ extension WatchListView {
         }
         .listStyle(PlainListStyle())
         .refreshable {
-            vm.reloadCoinData()
+            homevm.reloadCoinData()
         }
     }
 
@@ -79,25 +184,25 @@ extension WatchListView {
             HStack(spacing: 4) {
                 Text("Coin")
                 Image(systemName: "chevron.down")
-                    .opacity((vm.sortCoinsOption == .rank || vm.sortCoinsOption == .rankReversed) ? 1.0 : 0.0)
-                    .rotationEffect(Angle(degrees: vm.sortCoinsOption == .rank ? 0 : 180))
+                    .opacity((homevm.sortCoinsOption == .rank || homevm.sortCoinsOption == .rankReversed) ? 1.0 : 0.0)
+                    .rotationEffect(Angle(degrees: homevm.sortCoinsOption == .rank ? 0 : 180))
             }
             .onTapGesture {
                 withAnimation(.default) {
-                    vm.sortCoinsOption = vm.sortCoinsOption == .rank ? .rankReversed : .rank
+                    homevm.sortCoinsOption = homevm.sortCoinsOption == .rank ? .rankReversed : .rank
                 }
             }
             Spacer()
             HStack(spacing: 4) {
                 Text("Current Price")
                 Image(systemName: "chevron.down")
-                    .opacity((vm.sortCoinsOption == .price || vm.sortCoinsOption == .priceReversed) ? 1.0 : 0.0)
-                    .rotationEffect(Angle(degrees: vm.sortCoinsOption == .price ? 0 : 180))
+                    .opacity((homevm.sortCoinsOption == .price || homevm.sortCoinsOption == .priceReversed) ? 1.0 : 0.0)
+                    .rotationEffect(Angle(degrees: homevm.sortCoinsOption == .price ? 0 : 180))
             }
             .frame(width: UIScreen.main.bounds.width / 3.2, alignment: .trailing)
             .onTapGesture {
                 withAnimation(.default) {
-                    vm.sortCoinsOption = vm.sortCoinsOption == .price ? .priceReversed : .price
+                    homevm.sortCoinsOption = homevm.sortCoinsOption == .price ? .priceReversed : .price
                 }
             }
         }

@@ -22,14 +22,19 @@ struct LivePricesView: View {
         TabView(selection: $selectedItem) {
             homeBodyView
                 .tag(1)
+                //.toolbar(.hidden, for: .navigationBar)
             PortfolioView()
                 .tag(2)
+                //.toolbar(.hidden, for: .navigationBar)
             WatchListView()
                 .tag(3)
+                //.toolbar(.hidden, for: .navigationBar)
             NewsView()
                 .tag(4)
+                //.toolbar(.hidden, for: .navigationBar)
             SettingsView(manager: manager)
                 .tag(5)
+                //.toolbar(.hidden, for: .navigationBar)
         }
         .accentColor(Color.theme.accent)
         .onChange(of: selectedItem) { value in
@@ -58,7 +63,7 @@ struct HomeView_Previews: PreviewProvider {
 extension LivePricesView {
 
     private var homeBodyView: some View {
-        ZStack {
+        NavigationStack {
             VStack {
                 homeHeader
                 
@@ -70,7 +75,11 @@ extension LivePricesView {
                 allCoinsList
                 Spacer(minLength: 0)
             }
+//            .navigationTitle("Top Level List")
+//            .navigationBarTitleDisplayMode(.inline)
+//            .ignoresSafeArea(.all)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .background(
             NavigationLink(isActive: $showDetailView, destination: {
                 CoinDetailLoadingView(coin: $selectedCoin)
@@ -80,6 +89,8 @@ extension LivePricesView {
             Label("Live Prices", systemImage: "chart.line.uptrend.xyaxis")
                 .accessibilityLabel("Live Prices")
         }
+        
+        
     }
 
     private var homeHeader: some View {

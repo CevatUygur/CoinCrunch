@@ -2,29 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>Localization native development region</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleName</key>
-	<string>$(APP_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(APP_BUNDLE_ID)</string>
-	<key>NEWS_API_KEY</key>
-	<string>$(NEWS_API_KEY)</string>
-	<key>NEWS_BASE_URL</key>
-	<string>$(NEWS_BASE_URL)</string>
-	<key>MARKET_DATA_URL</key>
-	<string>$(MARKET_DATA_URL)</string>
+	<key>COIN_DATA_URL</key>
+	<string>$(COIN_DATA_URL)</string>
 	<key>COIN_DETAIL_BASE_URL</key>
 	<string>$(COIN_DETAIL_BASE_URL)</string>
 	<key>COIN_DETAIL_KEY</key>
 	<string>$(COIN_DETAIL_KEY)</string>
-	<key>COIN_DATA_URL</key>
-	<string>$(COIN_DATA_URL)</string>
-	<key>CFBundlePackageType</key>
-	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>Localization native development region</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>MARKET_DATA_URL</key>
+	<string>$(MARKET_DATA_URL)</string>
+	<key>NEWS_API_KEY</key>
+	<string>$(NEWS_API_KEY)</string>
+	<key>NEWS_BASE_URL</key>
+	<string>$(NEWS_BASE_URL)</string>
 </dict>
 </plist>

@@ -22,6 +22,13 @@ struct CoinCrunchApp: App {
         navBarAppearance.configureWithOpaqueBackground()
         UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
         UINavigationBar.appearance().standardAppearance = navBarAppearance
+        //navBarAppearance.backgroundColor = UIColor.red
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        //tabBarAppearance.backgroundColor = UIColor.red
         
     }
     

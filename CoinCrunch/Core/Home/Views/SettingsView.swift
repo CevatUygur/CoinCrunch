@@ -24,7 +24,7 @@ struct SettingsView: View {
             }
             .listStyle(.grouped)
             .navigationTitle("Settings")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.automatic)
         }
         .easyFullScreenCover(isPresented: $manager.showAppearanceSwitchView) {
             ApperanceModeSwitchView(manager: manager)
@@ -34,7 +34,7 @@ struct SettingsView: View {
             Label("Settings", systemImage: "gear")
                 .accessibilityLabel("Settings")
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.automatic)
     }
 }
 

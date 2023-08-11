@@ -18,8 +18,9 @@ struct CoinDetailLoadingView: View {
             }
         }
         .navigationBarHidden(false)
-        .navigationBarTitleDisplayMode(.inline)
     }
+    
+    
 }
 
 struct CoinDetailView: View {
@@ -93,6 +94,7 @@ extension CoinDetailView {
                 //check watchList
                 if homevm.checkWatchList(coin: vm.coin) {
                     Image(systemName: "star.fill")
+                        .foregroundStyle(Color.theme.yellow)
                 } else {
                     Image(systemName: "star")
                 }
