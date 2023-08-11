@@ -22,19 +22,14 @@ struct LivePricesView: View {
         TabView(selection: $selectedItem) {
             homeBodyView
                 .tag(1)
-                //.toolbar(.hidden, for: .navigationBar)
             PortfolioView()
                 .tag(2)
-                //.toolbar(.hidden, for: .navigationBar)
             WatchListView()
                 .tag(3)
-                //.toolbar(.hidden, for: .navigationBar)
             NewsView()
                 .tag(4)
-                //.toolbar(.hidden, for: .navigationBar)
             SettingsView(manager: manager)
                 .tag(5)
-                //.toolbar(.hidden, for: .navigationBar)
         }
         .accentColor(Color.theme.accent)
         .onChange(of: selectedItem) { value in

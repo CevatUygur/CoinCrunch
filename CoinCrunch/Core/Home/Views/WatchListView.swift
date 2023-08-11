@@ -94,13 +94,13 @@ extension WatchListView {
                         .frame(width: 200, height: 200)
                 }
                 
-                VStack(spacing: 24) {
+                VStack(spacing: 20) {
                     
                     Text("Find and follow your winning coins")
                         .font(.title3)
                         .fontWeight(.bold)
                     
-                    VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 8) {
                         
                         HStack {
                             Image(systemName: "star.fill")
@@ -111,18 +111,26 @@ extension WatchListView {
                         
                         HStack {
                             Image(systemName: "newspaper.fill")
-                            Text("Get relevant news updates [SOON]")
+                            Text("Get relevant news updates")
+                            Text("[SOON]")
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .foregroundStyle(Color.theme.green)
                         }
                         .font(.subheadline)
 
                         HStack {
                             Image(systemName: "bell.badge.fill")
-                            Text("Receive real-time alerts [SOON]")
+                            Text("Receive real-time alerts")
+                            Text("[SOON]")
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .foregroundStyle(Color.theme.green)
                         }
                         .font(.subheadline)
                     }
                 }
-                .padding(.top, 24)
+                .padding(.top, 20)
             }
             
             Button {

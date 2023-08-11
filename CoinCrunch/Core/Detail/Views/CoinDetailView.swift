@@ -19,8 +19,6 @@ struct CoinDetailLoadingView: View {
         }
         .navigationBarHidden(false)
     }
-    
-    
 }
 
 struct CoinDetailView: View {
