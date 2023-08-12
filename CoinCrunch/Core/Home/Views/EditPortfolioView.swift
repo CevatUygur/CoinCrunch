@@ -38,7 +38,7 @@ struct EditPortfolioView: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    SearchBarView(searchText: $vm.searchText)
+                    //SearchBarView(searchText: $vm.searchText)
                     coinLogoList
                     
                     if selectedCoin != nil {

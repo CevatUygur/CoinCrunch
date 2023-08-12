@@ -33,7 +33,7 @@ struct WatchListView: View {
                 })
         }
         .tabItem {
-            Label("Watchlist", systemImage: "star.fill")
+            Label("Watchlist", systemImage: "star")
                 .accessibilityLabel("Watchlist")
         }
         .navigationBarTitleDisplayMode(.automatic)

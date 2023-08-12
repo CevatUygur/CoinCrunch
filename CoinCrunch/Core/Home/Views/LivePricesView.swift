@@ -16,7 +16,18 @@ struct LivePricesView: View {
     @State private var showDetailView: Bool = false
     @State private var showPortfolio: Bool = false
     
+    @State var show = false
+    
+    @State private var scaleRatioX = 0.7
+    @State private var scaleRatioY = 0.7
+    
+    private var searchBarAnimation : Bool {
+        scaleRatioX == 0.7 ? true : false
+    }
+    
     @State private var selectedItem = 1
+    
+    @State private var animationsRunning = true
     
     var body: some View {
         TabView(selection: $selectedItem) {
@@ -56,38 +67,99 @@ struct HomeView_Previews: PreviewProvider {
 }
 
 extension LivePricesView {
-
+    
     private var homeBodyView: some View {
-        NavigationStack {
-            VStack {
-                homeHeader
+        NavigationView {
+            livePricesBodyView
+                .navigationTitle("Live Prices")
+                .navigationBarTitleDisplayMode(.automatic)
                 
-                HomeStatsView()
-                    .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-                    
-                SearchBarView(searchText: $vm.searchText)
-                columnTitles
-                allCoinsList
-                Spacer(minLength: 0)
-            }
-//            .navigationTitle("Top Level List")
-//            .navigationBarTitleDisplayMode(.inline)
-//            .ignoresSafeArea(.all)
         }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .background(
-            NavigationLink(isActive: $showDetailView, destination: {
-                CoinDetailLoadingView(coin: $selectedCoin)
-            }, label: { EmptyView() })
-        )
         .tabItem {
             Label("Live Prices", systemImage: "chart.line.uptrend.xyaxis")
                 .accessibilityLabel("Live Prices")
         }
-        
-        
+        .navigationBarTitleDisplayMode(.automatic)
+        .onAppear {
+            animationsRunning.toggle()
+        }
     }
+    
+    private var customSearchBarView: some View {
+        HStack {
+            Image(systemName: "magnifyingglass")
+                .font(searchBarAnimation ? .title2 : .title)
+                .foregroundColor(
+                    vm.searchText.isEmpty ? Color.theme.secondaryText : Color.theme.accent
+                )
+                
+            TextField("Search coin...", text: $vm.searchText)
+                .frame(height: searchBarAnimation ? 42 : 50, alignment: .leading)
+                .foregroundColor(Color.theme.accent)
+                .disableAutocorrection(true)
+                .padding(.trailing, searchBarAnimation ? 0 : 32)
+                .onTapGesture {
+                    withAnimation {
+                        scaleRatioX = 1.0
+                        scaleRatioY = 1.0
+                    }
+                }
+                .overlay(
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title)
+                        .padding() //<- to extend tappable are for better UX
+                        .offset(x: 16) //<- to extend tappable are for better UX
+                        .foregroundColor(Color.theme.accent)
+                        .opacity(searchBarAnimation ? 0.0 : 1.0)
+                        .onTapGesture {
+                            UIApplication.shared.endEditing()
+                            vm.searchText = ""
+                            withAnimation {
+                                scaleRatioX = 0.7
+                                scaleRatioY = 0.7
+                            }
+                            
+                        }
+                    , alignment: .trailing
+                )
+        }
+        .font(.headline)
+        .padding(.vertical, 5)
+        .padding(.horizontal, 12)
+        .background(
+            RoundedRectangle(cornerRadius: searchBarAnimation ? 12 : 12)
+                .fill(Color.theme.background)
+                .shadow(color: Color.theme.accent.opacity(0.15), radius: 10, x: 0, y:0)
+        )
+        .padding(.horizontal, 12)
+        .padding(.vertical, 4)
+        .frame(alignment: .center)
+        .scaleEffect(CGSize(width: scaleRatioX, height: scaleRatioY), anchor: .center)
+    }
+    
+    private var livePricesBodyView: some View {
+        VStack {
+            HomeStatsView()
+                .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+                .padding(.top, 10)
+        
+            customSearchBarView
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, searchBarAnimation ? 88 : 0)
+                .padding(.top, searchBarAnimation ? -12 : 0)
 
+            columnTitles
+                .padding(.top, searchBarAnimation ? -8 : 4)
+            
+            allCoinsList
+                .background(
+                    NavigationLink(isActive: $showDetailView, destination: {
+                        CoinDetailLoadingView(coin: $selectedCoin)
+                    }, label: { EmptyView() })
+                )
+        }
+    }
+    
     private var homeHeader: some View {
         HStack {
             Text("Live Prices")
