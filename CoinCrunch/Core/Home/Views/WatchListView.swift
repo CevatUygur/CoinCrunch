@@ -29,6 +29,10 @@ struct WatchListView: View {
                             .onTapGesture {
                                 showAddToWatchListView.toggle()
                             }
+                            .sheet(isPresented: $showAddToWatchListView) {
+                                AddToWatchlistView()
+                                    .environmentObject(homevm)
+                            }
                     }
                 })
         }
@@ -60,7 +64,7 @@ extension WatchListView {
                 if homevm.watchListCoins.isEmpty {
                     emptyView
                         .sheet(isPresented: $showAddToWatchListView) {
-                            EditPortfolioView()
+                            AddToWatchlistView()
                                 .environmentObject(homevm)
                         }
                 } else {
@@ -85,13 +89,13 @@ extension WatchListView {
                     Image(systemName: "doc.text.magnifyingglass")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 180, height: 180)
+                        .frame(width: 160, height: 160)
                         .symbolEffect(.bounce.up.byLayer, value: animationsRunning)
                 } else {
                     Image(systemName: "doc.text.magnifyingglass")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 200, height: 200)
+                        .frame(width: 160, height: 160)
                 }
                 
                 VStack(spacing: 20) {

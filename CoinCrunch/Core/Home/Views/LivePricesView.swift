@@ -27,8 +27,6 @@ struct LivePricesView: View {
     
     @State private var selectedItem = 1
     
-    @State private var animationsRunning = true
-    
     var body: some View {
         TabView(selection: $selectedItem) {
             homeBodyView
@@ -73,16 +71,13 @@ extension LivePricesView {
             livePricesBodyView
                 .navigationTitle("Live Prices")
                 .navigationBarTitleDisplayMode(.automatic)
-                
+            
         }
         .tabItem {
             Label("Live Prices", systemImage: "chart.line.uptrend.xyaxis")
                 .accessibilityLabel("Live Prices")
         }
         .navigationBarTitleDisplayMode(.automatic)
-        .onAppear {
-            animationsRunning.toggle()
-        }
     }
     
     private var customSearchBarView: some View {
@@ -92,7 +87,7 @@ extension LivePricesView {
                 .foregroundColor(
                     vm.searchText.isEmpty ? Color.theme.secondaryText : Color.theme.accent
                 )
-                
+            
             TextField("Search coin...", text: $vm.searchText)
                 .frame(height: searchBarAnimation ? 42 : 50, alignment: .leading)
                 .foregroundColor(Color.theme.accent)
@@ -142,12 +137,12 @@ extension LivePricesView {
             HomeStatsView()
                 .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                 .padding(.top, 10)
-        
+            
             customSearchBarView
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, searchBarAnimation ? 88 : 0)
                 .padding(.top, searchBarAnimation ? -12 : 0)
-
+            
             columnTitles
                 .padding(.top, searchBarAnimation ? -8 : 4)
             
@@ -175,23 +170,50 @@ extension LivePricesView {
         }
         .padding(.horizontal)
     }
-
+    
     private var allCoinsList: some View {
         List {
-            ForEach(vm.allCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: false)
-                    .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
-                    .onTapGesture {
-                        segue(coin: coin)
-                    }
+            if vm.allCoins.isEmpty {
+                Text("Loading...")
+            } else {
+                ForEach(vm.allCoins) { coin in
+                    CoinRowView(coin: coin, showHoldingsColumn: false)
+                        .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                        .onTapGesture {
+                            segue(coin: coin)
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            
+                            if !vm.checkWatchList(coin: coin) {
+                                
+                                Button {
+                                    vm.updateWatchList(coin: coin)
+                                } label: {
+                                    Label("to Watchlist", systemImage: "plus.square")
+                                }
+                                .tint(.green)
+                                
+                            } else {
+                                Button {
+                                    vm.updateWatchList(coin: coin)
+                                } label: {
+                                    Label("from Watchlist", systemImage: "trash.fill")
+                                }
+                                .tint(.red)
+                            }
+                            
+                        }
+                }
             }
+            
         }
-        .listStyle(PlainListStyle())
+        .listStyle(.plain)
         .refreshable {
             vm.reloadCoinData()
         }
+        
     }
-
+    
     private var columnTitles: some View {
         HStack {
             HStack(spacing: 4) {

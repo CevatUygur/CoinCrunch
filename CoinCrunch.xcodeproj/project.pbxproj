@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CF002D3E2A855F8B00F28E30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF002D3D2A855F8B00F28E30 /* LaunchScreen.storyboard */; };
+		CF002D402A8904CF00F28E30 /* AddToWatchlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF002D3F2A8904CF00F28E30 /* AddToWatchlistView.swift */; };
 		CF0228D62A36235500C472B5 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0228D52A36235500C472B5 /* XMarkButton.swift */; };
 		CF1E3B53297DE23800E25730 /* CoinDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E3B52297DE23800E25730 /* CoinDetailViewModel.swift */; };
 		CF1E3B55297DE4BC00E25730 /* CoinDetailDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E3B54297DE4BC00E25730 /* CoinDetailDataService.swift */; };
@@ -67,6 +68,7 @@
 		8E6C9D8CB40BE1989C5C760B /* Pods-CoinCrunch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinCrunch.release.xcconfig"; path = "Target Support Files/Pods-CoinCrunch/Pods-CoinCrunch.release.xcconfig"; sourceTree = "<group>"; };
 		ADFD62E7646F33274114A97F /* Pods_CoinCrunch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoinCrunch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF002D3D2A855F8B00F28E30 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CF002D3F2A8904CF00F28E30 /* AddToWatchlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToWatchlistView.swift; sourceTree = "<group>"; };
 		CF0228D52A36235500C472B5 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
 		CF1E3B52297DE23800E25730 /* CoinDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailViewModel.swift; sourceTree = "<group>"; };
 		CF1E3B54297DE4BC00E25730 /* CoinDetailDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailDataService.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				CFF88A9D297C64FA009384CE /* HomeStatsView.swift */,
 				CFF88A7E2978CB62009384CE /* CoinRowView.swift */,
 				CFF88AA3297C75A4009384CE /* EditPortfolioView.swift */,
+				CF002D3F2A8904CF00F28E30 /* AddToWatchlistView.swift */,
 				CF455B73298C71E0001EBE39 /* ApperanceModeSwitchView.swift */,
 				CFEF5C8C2A30B43700D19B5B /* NewsView.swift */,
 			);
@@ -505,6 +508,7 @@
 				CFF88A8B2979679A009384CE /* NetworkingManager.swift in Sources */,
 				CFEC605A299C3EF500D29981 /* WatchListContainer.xcdatamodeld in Sources */,
 				CFF88AA8297C9CF5009384CE /* CoinLogoView.swift in Sources */,
+				CF002D402A8904CF00F28E30 /* AddToWatchlistView.swift in Sources */,
 				CF6100222A35D8FF00E2C95D /* EnvironmentAPI.swift in Sources */,
 				CFF88A9E297C64FA009384CE /* HomeStatsView.swift in Sources */,
 				CFF88AA2297C6D0B009384CE /* MarketDataService.swift in Sources */,

@@ -52,7 +52,7 @@ extension CoinRowView {
             arrowColumn
                 .padding(.trailing, 6)
             CoinImageView(coin: coin)
-                .frame(width: 30, height: 30)
+                .frame(width: 40, height: 40)
                 .background(Color.white)
             VStack(alignment: .leading, spacing: 0) {
                 Text(coin.symbol.uppercased())
@@ -66,6 +66,7 @@ extension CoinRowView {
             }
             .padding(.leading, 6)
         }
+        .frame(height: 70)
     }
     
     private var arrowColumn: some View {
