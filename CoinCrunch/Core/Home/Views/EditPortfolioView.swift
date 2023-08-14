@@ -84,7 +84,7 @@ extension EditPortfolioView {
     private var coinLogoList: some View {
         ScrollView(.horizontal, showsIndicators: false, content: { LazyHStack(spacing: 10){
             ForEach(vm.searchText.isEmpty ? vm.portfolioCoins : vm.allCoins) { coin in
-                    CoinLogoView(coin: coin)
+                    CoinLogoView(coin: coin, showStar: false)
                         .frame(width: 75)
                         .padding(4)
                         .onTapGesture {

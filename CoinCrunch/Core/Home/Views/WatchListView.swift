@@ -25,7 +25,8 @@ struct WatchListView: View {
                 .navigationBarTitleDisplayMode(.automatic)
                 .toolbar(content: {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Image(systemName: "plus")
+                        CircleButtonView(iconName: "plus")
+                            .padding(.top, 32)
                             .onTapGesture {
                                 showAddToWatchListView.toggle()
                             }
@@ -157,7 +158,7 @@ extension WatchListView {
     private var watchListCoinsView: some View {
         List {
             ForEach(homevm.watchListCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: false)
+                CoinRowView(coin: coin, showHoldingsColumn: false, showStar: true)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                     .onTapGesture {
                         segue(coin: coin)
@@ -168,21 +169,8 @@ extension WatchListView {
                     homevm.updateWatchList(coin: homevm.watchListCoins[index])
                 }
             }
-        }
-        .listStyle(PlainListStyle())
-        .refreshable {
-            homevm.reloadCoinData()
-        }
-    }
-    
-    private var allCoinsView: some View {
-        List {
-            ForEach(homevm.allCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: false)
-                    .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
-                    .onTapGesture {
-                        segue(coin: coin)
-                    }
+            .alignmentGuide(.listRowSeparatorLeading) { _ in
+                0
             }
         }
         .listStyle(PlainListStyle())
@@ -190,7 +178,7 @@ extension WatchListView {
             homevm.reloadCoinData()
         }
     }
-
+    
     private var columnTitles: some View {
         HStack {
             HStack(spacing: 4) {

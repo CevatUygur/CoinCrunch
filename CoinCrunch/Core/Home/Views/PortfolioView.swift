@@ -62,6 +62,9 @@ extension PortfolioView {
                     .frame(width: UIScreen.main.bounds.width, alignment: .trailing)
                
                 SearchBarView(searchText: $vm.searchText)
+                    .onDisappear{
+                        endEditingForSearchBar()
+                    }
                 
                 if vm.portfolioCoins.isEmpty {
                     emptyView
@@ -99,11 +102,14 @@ extension PortfolioView {
     private var portfolioCoinsList: some View {
         List {
             ForEach(vm.portfolioCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: true)
+                CoinRowView(coin: coin, showHoldingsColumn: true, showStar: vm.checkWatchList(coin: coin) ? true : false)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                     .onTapGesture {
                         segue(coin: coin)
                     }
+            }
+            .alignmentGuide(.listRowSeparatorLeading) { _ in
+                0
             }
         }
         .listStyle(PlainListStyle())
@@ -199,7 +205,7 @@ extension PortfolioView {
                 }
             }
             Spacer()
-            HStack(spacing: 4) {
+            HStack(spacing: 4) { 
                 Text("Holdings")
                 Image(systemName: "chevron.down")
                     .opacity((vm.sortCoinsOption == .holdings || vm.sortCoinsOption == .holdingsReversed) ? 1.0 : 0.0)
@@ -216,7 +222,7 @@ extension PortfolioView {
                     .opacity((vm.sortCoinsOption == .price || vm.sortCoinsOption == .priceReversed) ? 1.0 : 0.0)
                     .rotationEffect(Angle(degrees: vm.sortCoinsOption == .price ? 0 : 180))
             }
-            .frame(width: UIScreen.main.bounds.width / 3.2, alignment: .trailing)
+            .frame(width: UIScreen.main.bounds.width / 4.2, alignment: .trailing)
             .onTapGesture {
                 withAnimation(.default) {
                     vm.sortCoinsOption = vm.sortCoinsOption == .price ? .priceReversed : .price
@@ -231,5 +237,10 @@ extension PortfolioView {
     private func segue(coin: CoinModel) {
         selectedCoin = coin
         showDetailView.toggle()
+    }
+    
+    private func endEditingForSearchBar() {
+        UIApplication.shared.endEditing()
+        vm.searchText = ""
     }
 }

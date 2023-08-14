@@ -20,7 +20,7 @@ struct LivePricesView: View {
     
     @State private var scaleRatioX = 0.7
     @State private var scaleRatioY = 0.7
-    
+        
     private var searchBarAnimation : Bool {
         scaleRatioX == 0.7 ? true : false
     }
@@ -173,26 +173,38 @@ extension LivePricesView {
     
     private var allCoinsList: some View {
         List {
-            if vm.allCoins.isEmpty {
-                Text("Loading...")
+            if vm.allCoins.isEmpty && vm.searchText.isEmpty {
+                VStack(spacing: 4){
+                    Text("Trying to fetch data...")
+                        .font(.callout)
+                    HStack(spacing: 3){
+                        Image(systemName: "arrow.down")
+                        Text("Pull down to refresh")
+                    }
+                    .font(.footnote)
+                }
+                .frame(maxWidth: .infinity)
+                .alignmentGuide(.listRowSeparatorLeading) { _ in
+                    -20
+                }
+                
+                
+                
             } else {
                 ForEach(vm.allCoins) { coin in
-                    CoinRowView(coin: coin, showHoldingsColumn: false)
+                    CoinRowView(coin: coin, showHoldingsColumn: false, showStar: vm.checkWatchList(coin: coin) ? true : false)
                         .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                         .onTapGesture {
                             segue(coin: coin)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            
                             if !vm.checkWatchList(coin: coin) {
-                                
                                 Button {
                                     vm.updateWatchList(coin: coin)
                                 } label: {
                                     Label("to Watchlist", systemImage: "plus.square")
                                 }
                                 .tint(.green)
-                                
                             } else {
                                 Button {
                                     vm.updateWatchList(coin: coin)
@@ -201,17 +213,17 @@ extension LivePricesView {
                                 }
                                 .tint(.red)
                             }
-                            
                         }
                 }
+                .alignmentGuide(.listRowSeparatorLeading) { _ in
+                    0
+                }
             }
-            
         }
         .listStyle(.plain)
         .refreshable {
             vm.reloadCoinData()
         }
-        
     }
     
     private var columnTitles: some View {
@@ -234,7 +246,7 @@ extension LivePricesView {
                     .opacity((vm.sortCoinsOption == .price || vm.sortCoinsOption == .priceReversed) ? 1.0 : 0.0)
                     .rotationEffect(Angle(degrees: vm.sortCoinsOption == .price ? 0 : 180))
             }
-            .frame(width: UIScreen.main.bounds.width / 3.2, alignment: .trailing)
+            .frame(width: UIScreen.main.bounds.width / 4.2, alignment: .trailing)
             .onTapGesture {
                 withAnimation(.default) {
                     vm.sortCoinsOption = vm.sortCoinsOption == .price ? .priceReversed : .price
@@ -251,4 +263,3 @@ extension LivePricesView {
         showDetailView.toggle()
     }
 }
-

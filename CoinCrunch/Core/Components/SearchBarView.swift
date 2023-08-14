@@ -14,6 +14,7 @@ struct SearchBarView: View {
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
+                .font(.title2)
                 .foregroundColor(
                     searchText.isEmpty ? Color.theme.secondaryText : Color.theme.accent
                 )
@@ -22,6 +23,7 @@ struct SearchBarView: View {
                 .disableAutocorrection(true)
                 .overlay(
                     Image(systemName: "xmark.circle.fill")
+                        .font(.title2)
                         .padding() //<- to extend tappable are for better UX
                         .offset(x: 10) //<- to extend tappable are for better UX
                         .foregroundColor(Color.theme.accent)
@@ -37,7 +39,7 @@ struct SearchBarView: View {
         .font(.headline)
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 25)
+            RoundedRectangle(cornerRadius: 12)
                 .fill(Color.theme.background)
                 .shadow(color: Color.theme.accent.opacity(0.15), radius: 10, x: 0, y:0)
         )

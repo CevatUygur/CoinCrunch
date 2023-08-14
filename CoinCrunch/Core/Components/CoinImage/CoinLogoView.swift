@@ -11,8 +11,20 @@ struct CoinLogoView: View {
     
     let coin: CoinModel
     
+    let showStar: Bool
+    
     var body: some View {
         VStack {
+            HStack{
+                Spacer()
+                if showStar {
+                    Image(systemName: "star.fill")
+                        .foregroundStyle(Color.theme.yellow)
+                        .font(.caption2)
+                }
+            }
+            .frame(width: 80)
+            
             CoinImageView(coin: coin)
                 .frame(width: 50, height: 50)
             Text(coin.symbol.uppercased())
@@ -33,9 +45,9 @@ struct CoinLogoView: View {
 struct CoinLogoView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CoinLogoView(coin: dev.coin)
+            CoinLogoView(coin: dev.coin, showStar: true)
                 .preferredColorScheme(.light)
-            CoinLogoView(coin: dev.coin)
+            CoinLogoView(coin: dev.coin, showStar: true)
                 .preferredColorScheme(.dark)
         }
         .previewLayout(.sizeThatFits)

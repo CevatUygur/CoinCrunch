@@ -14,6 +14,7 @@ struct AddToWatchlistView: View {
     @State private var selectedCoin: CoinModel?
     @State private var quantityText: String = ""
     @State private var showCheckmark: Bool = false
+    @State private var hideDoneButton: Bool = false
     
     private var showSaveButton: Bool {
         guard let quantityDouble = Double(quantityText.replacingOccurrences(of: ",", with: ".")) else { return false}
@@ -39,31 +40,20 @@ struct AddToWatchlistView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     SearchBarView(searchText: $vm.searchText)
+                        .onDisappear {
+                            endEditingForSearchBar()
+                        }
+                        .padding(.top, 16)
                     coinLogoList
-                    //allCoinsList
-                    
-//                    if selectedCoin != nil {
-//                        portfolioInputSection
-//                    }
-                    
                 }
             }
             .navigationTitle("Edit Watchlist")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    XMarkButton(dismiss: _dismiss)
-
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     trailingNavBarButtons
                 }
             })
-//            .onChange(of: vm.searchText) { value in
-//                if value == "" {
-//                    removeSelectedCoin()
-//                }
-//            }
         }
     }
 }
@@ -85,7 +75,7 @@ extension AddToWatchlistView {
     private var coinLogoList: some View {
         ScrollView(.horizontal, showsIndicators: false, content: { LazyHStack(spacing: 8){
             ForEach(vm.allCoins) { coin in
-                CoinLogoView(coin: coin)
+                CoinLogoView(coin: coin, showStar: vm.checkWatchList(coin: coin) ? true : false)
                     .frame(width: 82)
                     .padding(4)
                     .onTapGesture {
@@ -99,37 +89,30 @@ extension AddToWatchlistView {
                     )
                     .opacity(vm.checkWatchList(coin: coin) ? 1.0 : 0.8)
                     .scaleEffect(x: vm.checkWatchList(coin: coin) ? 1.0 : 0.95, y: vm.checkWatchList(coin: coin) ? 1.0 : 0.95)
-                
             }
         }
-        .frame(height: 150)
+        .frame(height: 120)
         .padding()
             
         })
     }
 
-    
-    private func updateSelectedCoin(coin: CoinModel) {
-        
-        selectedCoin = coin
-        
-        if let selectedCoin {
-            vm.updateWatchList(coin: selectedCoin)
-        }
-                
-    }
-            
     private var trailingNavBarButtons: some View {
-        HStack(spacing: 10) {
-            Image(systemName: "checkmark")
-                .opacity(showCheckmark ? 1.0 : 0.0)
-            Button {
-                doneButtonTapped()
-            } label: {
+        
+        Button {
+            doneButtonTapped()
+        } label: {
+            
+            if !hideDoneButton {
                 Text("Done".uppercased())
+                    .font(.headline)
+            }
+            
+            if showCheckmark {
+                Image(systemName: "checkmark")
+                    .font(.headline)
             }
         }
-        .font(.headline)
     }
     
     private func doneButtonTapped() {
@@ -138,14 +121,23 @@ extension AddToWatchlistView {
         withAnimation(.easeIn) {
             showCheckmark = true
         }
+        
+        // hide doneButton
+        hideDoneButton = true
+        
+        // end editing
+        endEditingForSearchBar()
                 
-        // hide keyboard
+        // dismiss with delay for better UX
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            dismiss()
+        }
+        
+    }
+    
+    func endEditingForSearchBar() {
         UIApplication.shared.endEditing()
         vm.searchText = ""
-        
-        // dismiss
-        dismiss()
-
     }
     
 }

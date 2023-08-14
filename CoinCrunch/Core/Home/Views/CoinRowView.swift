@@ -11,9 +11,10 @@ struct CoinRowView: View {
     
     var coin: CoinModel
     let showHoldingsColumn: Bool
+    let showStar: Bool
     
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(alignment: .center, spacing: 0) {
             leftColumn
             Spacer()
             if showHoldingsColumn {
@@ -31,10 +32,10 @@ struct CoinRowView: View {
 struct CoinRowView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CoinRowView(coin: dev.coin, showHoldingsColumn: false)
+            CoinRowView(coin: dev.coin, showHoldingsColumn: false, showStar: true)
                 .previewLayout(.sizeThatFits)
             
-            CoinRowView(coin: dev.coin, showHoldingsColumn: true)
+            CoinRowView(coin: dev.coin, showHoldingsColumn: true, showStar: true)
                 .previewLayout(.sizeThatFits)
                 .preferredColorScheme(.dark)
         }
@@ -45,33 +46,35 @@ extension CoinRowView {
     
     private var leftColumn: some View {
         HStack(spacing: 0) {
-            Text("\(coin.rank)")
-                .font(.caption)
-                .foregroundColor(Color.theme.secondaryText)
-                .frame(minWidth: 32)
             arrowColumn
-                .padding(.trailing, 6)
+                .padding(.horizontal, 8)
             CoinImageView(coin: coin)
-                .frame(width: 40, height: 40)
+                .frame(height: 40)
                 .background(Color.white)
             VStack(alignment: .leading, spacing: 0) {
-                Text(coin.symbol.uppercased())
-                    .frame(alignment: .leading)
-                    .font(.headline)
-
-                    .foregroundColor(Color.theme.accent)
+                HStack(alignment: .center, spacing: 2) {
+                    Text(coin.symbol.uppercased())
+                        .frame(alignment: .leading)
+                        .font(.headline)
+                        .foregroundColor(Color.theme.accent)
+                    if showStar {
+                        Image(systemName: "star.fill")
+                            .foregroundStyle(Color.theme.yellow)
+                            .font(.caption)
+                    }
+                }
                 Text(coin.name.trunc(length: 16))
                     .font(.caption)
                     .foregroundColor(Color.theme.accent)
             }
-            .padding(.leading, 6)
+            .padding(.leading, 4  )
         }
         .frame(height: 70)
     }
     
     private var arrowColumn: some View {
     
-        let imageName = coin.percentage24HoursUp ? "triangle.fill" : "triangle.fill"
+        let imageName = "triangle.fill"
         
         return Image(systemName: imageName)
             .rotationEffect(
@@ -100,6 +103,6 @@ extension CoinRowView {
                     coin.percentage24HoursUp ? Color.theme.green : Color.theme.red
                 )
         }
-        .frame(width: UIScreen.main.bounds.width / 3.2, alignment: .trailing)
+        .frame(width: UIScreen.main.bounds.width / 4.2, alignment: .trailing)
     }
 }
