@@ -85,7 +85,6 @@ extension WatchListView {
     private var emptyView: some View {
         VStack {
             VStack{
-                
                 if #available(iOS 17.0, *) {
                     Image(systemName: "doc.text.magnifyingglass")
                         .resizable()

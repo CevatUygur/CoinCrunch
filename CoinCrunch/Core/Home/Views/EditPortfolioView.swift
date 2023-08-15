@@ -39,6 +39,9 @@ struct EditPortfolioView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     SearchBarView(searchText: $vm.searchText)
+                        .onDisappear {
+                            endEditingForSearchBar()
+                        }
                     coinLogoList
                     
                     if selectedCoin != nil {
@@ -183,8 +186,8 @@ extension EditPortfolioView {
         removeSelectedCoin()
         
         
-        // hide keyboard
-        UIApplication.shared.endEditing()
+        // end editing
+        endEditingForSearchBar()
         
         // hide checkmark
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -198,6 +201,11 @@ extension EditPortfolioView {
         selectedCoin = nil
         vm.searchText = ""
         quantityText = ""
+    }
+    
+    private func endEditingForSearchBar() {
+        UIApplication.shared.endEditing()
+        vm.searchText = ""
     }
     
 }

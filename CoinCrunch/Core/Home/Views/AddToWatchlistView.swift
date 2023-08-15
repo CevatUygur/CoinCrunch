@@ -135,7 +135,7 @@ extension AddToWatchlistView {
         
     }
     
-    func endEditingForSearchBar() {
+    private func endEditingForSearchBar() {
         UIApplication.shared.endEditing()
         vm.searchText = ""
     }
