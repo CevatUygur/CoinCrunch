@@ -15,6 +15,8 @@ struct EditPortfolioView: View {
     @State private var quantityText: String = ""
     @State private var showCheckmark: Bool = false
     
+    @Binding var coin: CoinModel?
+    
     private var showSaveButton: Bool {
         guard let quantityDouble = Double(quantityText.replacingOccurrences(of: ",", with: ".")) else { return false}
         
@@ -42,6 +44,11 @@ struct EditPortfolioView: View {
                         .onDisappear {
                             endEditingForSearchBar()
                         }
+                        .onAppear {
+                            withAnimation(.easeIn) {
+                                updateSelectedCoin(coin: coin)
+                            }
+                        }
                     coinLogoList
                     
                     if selectedCoin != nil {
@@ -54,7 +61,10 @@ struct EditPortfolioView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    XMarkButton(dismiss: _dismiss)
+                    XMarkButton().onTapGesture {
+                        saveButtonTapped()
+                        dismiss()
+                    }
 
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -70,17 +80,17 @@ struct EditPortfolioView: View {
     }
 }
 
-struct EditPortfolioView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            EditPortfolioView()
-                .preferredColorScheme(.light)
-            EditPortfolioView()
-                .preferredColorScheme(.dark)
-        }
-        .environmentObject(dev.homeVM)
-    }
-}
+//struct EditPortfolioView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            EditPortfolioView(coin: dev.coin)
+//                .preferredColorScheme(.light)
+//            EditPortfolioView(coin: dev.coin)
+//                .preferredColorScheme(.dark)
+//        }
+//        .environmentObject(dev.homeVM)
+//    }
+//}
 
 extension EditPortfolioView {
     
@@ -99,8 +109,8 @@ extension EditPortfolioView {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(selectedCoin?.id == coin.id ? Color.theme.green : Color.clear, lineWidth: 1)
                         )
-                        .opacity(selectedCoin?.id == coin.id ? 1.0 : 0.7)
-                        .scaleEffect(x: selectedCoin?.id == coin.id ? 1.0 : 0.9, y: selectedCoin?.id == coin.id ? 1.0 : 0.9)
+                        .opacity(selectedCoin?.id == coin.id || vm.checkPortfolio(coin: coin) ? 1.0 : 0.7)
+                        .scaleEffect(x: selectedCoin?.id == coin.id || vm.checkPortfolio(coin: coin) ? 1.0 : 0.9, y: selectedCoin?.id == coin.id || vm.checkPortfolio(coin: coin) ? 1.0 : 0.9)
                 }
             }
             .frame(height: 120)
@@ -108,8 +118,12 @@ extension EditPortfolioView {
         })
     }
     
-    private func updateSelectedCoin(coin: CoinModel) {
+    private func updateSelectedCoin(coin: CoinModel?) {
+        
         selectedCoin = coin
+        guard let coin = coin else { return }
+        
+        vm.updatePortfolio(coin: coin, amount: 0)
         
         if let portfolioCoin = vm.portfolioCoins.first(where: { $0.id == coin.id }),
            let amount = portfolioCoin.currentHoldings {
@@ -190,10 +204,11 @@ extension EditPortfolioView {
         endEditingForSearchBar()
         
         // hide checkmark
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             withAnimation(.easeOut) {
                 showCheckmark = false
             }
+            dismiss()
         }
     }
     

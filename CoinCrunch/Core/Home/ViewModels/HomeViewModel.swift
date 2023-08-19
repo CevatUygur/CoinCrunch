@@ -98,6 +98,10 @@ class HomeViewModel: ObservableObject {
         portfolioDataService.updatePortfolio(coin: coin, amount: amount)
     }
     
+    func checkPortfolio(coin: CoinModel) -> Bool {
+        portfolioDataService.checkPortfolio(coin: coin)
+    }
+    
     func checkWatchList(coin: CoinModel) -> Bool {
         watchListDataService.checkWatchList(coin: coin)
     }

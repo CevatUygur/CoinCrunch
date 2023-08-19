@@ -29,7 +29,7 @@ struct PortfolioView: View {
                                 showPortfolioView.toggle()
                             }
                             .sheet(isPresented: $showPortfolioView) {
-                                EditPortfolioView()
+                                EditPortfolioView(coin: $selectedCoin)
                                     .environmentObject(vm)
                             }
                     }
@@ -96,6 +96,21 @@ extension PortfolioView {
                         .onTapGesture {
                             segue(coin: coin)
                         }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true){
+                            Button(role: .destructive) {
+                                vm.updatePortfolio(coin: coin, amount: 0.0)
+                            } label: {
+                                Label("Delete", systemImage: "trash.fill")
+                            }
+                            //.tint(.red)
+                            Button {
+                                segueEdit(coin: coin)
+                            } label: {
+                                Label("Edit", systemImage: "square.and.pencil")
+                            }
+                            .tint(.green)
+                        }
+                    
                 }
                 .alignmentGuide(.listRowSeparatorLeading) { _ in
                     0
@@ -194,5 +209,10 @@ extension PortfolioView {
     private func segue(coin: CoinModel) {
         selectedCoin = coin
         showDetailView.toggle()
+    }
+    
+    private func segueEdit(coin: CoinModel) {
+        selectedCoin = coin
+        showPortfolioView.toggle()
     }
 }

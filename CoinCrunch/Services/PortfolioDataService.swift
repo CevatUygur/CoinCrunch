@@ -28,6 +28,16 @@ class PortfolioDataService {
     
     // MARK: - Public
     
+    func checkPortfolio(coin: CoinModel) -> Bool {
+        
+        // check if coin is already in portfolio
+        if savedEntities.first(where: { $0.coinID == coin.id }) != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func updatePortfolio(coin: CoinModel, amount: Double) {
         
         // check if coin is already in portfolio

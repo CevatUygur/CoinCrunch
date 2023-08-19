@@ -9,7 +9,6 @@ import SwiftUI
 
 struct WatchListView: View {
 
-    //@Environment(\.dismiss) var dismiss
     @State private var showAddToWatchListView: Bool = false // <- new sheet
     @EnvironmentObject private var homevm: HomeViewModel
 
@@ -62,24 +61,33 @@ extension WatchListView {
     private var watchListBodyView: some View {
         ZStack {
             VStack {
+                
                 if homevm.watchListCoins.isEmpty {
-                    emptyView
-                        .sheet(isPresented: $showAddToWatchListView) {
-                            AddToWatchlistView()
-                                .environmentObject(homevm)
+                    if homevm.allCoins.isEmpty {
+                        List{
+                            loadingMessage
                         }
+                        .listStyle(PlainListStyle())
+                        
+                    } else {
+                        emptyView
+                            .sheet(isPresented: $showAddToWatchListView) {
+                                AddToWatchlistView()
+                                    .environmentObject(homevm)
+                            }
+                    }
                 } else {
                     Spacer(minLength: 12)
                     columnTitles
                     watchListCoinsView
                 }
             }
+            .background(
+                NavigationLink(isActive: $showDetailView, destination: {
+                    CoinDetailLoadingView(coin: $selectedCoin)
+                }, label: { EmptyView() })
+            )
         }
-        .background(
-            NavigationLink(isActive: $showDetailView, destination: {
-                CoinDetailLoadingView(coin: $selectedCoin)
-            }, label: { EmptyView() })
-        )
     }
     
     private var emptyView: some View {
@@ -154,6 +162,22 @@ extension WatchListView {
         }
     }
     
+    private var loadingMessage: some View {
+        VStack(spacing: 4){
+            Text("Trying to fetch data...")
+                .font(.callout)
+            HStack(spacing: 3){
+                Image(systemName: "arrow.down")
+                Text("Pull down to refresh")
+            }
+            .font(.footnote)
+        }
+        .frame(maxWidth: .infinity)
+        .alignmentGuide(.listRowSeparatorLeading) { _ in
+            -20
+        }
+    }
+    
     private var watchListCoinsView: some View {
         List {
             ForEach(homevm.watchListCoins) { coin in
@@ -162,11 +186,13 @@ extension WatchListView {
                     .onTapGesture {
                         segue(coin: coin)
                     }
-            }
-            .onDelete { indexSet in
-                for index in indexSet{
-                    homevm.updateWatchList(coin: homevm.watchListCoins[index])
-                }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true){
+                        Button(role: .destructive) {
+                            homevm.updateWatchList(coin: coin)
+                        } label: {
+                            Label("Delete", systemImage: "trash.fill")
+                        }
+                    }
             }
             .alignmentGuide(.listRowSeparatorLeading) { _ in
                 0

@@ -9,15 +9,15 @@ import SwiftUI
 
 struct XMarkButton: View {
     
-    @Environment(\.dismiss) var dismiss
+    //@Environment(\.dismiss) var dismiss
     
     var body: some View {
         Image(systemName: "xmark")
             .font(.headline)
             .foregroundColor(Color.theme.accent)
-            .onTapGesture {
-                dismiss()
-            }
+//            .onTapGesture {
+//                dismiss()
+//            }
     }
 }
 

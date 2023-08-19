@@ -17,6 +17,8 @@ struct LivePricesView: View {
     @State private var showPortfolio: Bool = false
     @State private var selectedItem = 1
     
+    @State private var showPortfolioView: Bool = false // <- new sheet
+    
     var body: some View {
         TabView(selection: $selectedItem) {
             homeBodyView
@@ -95,6 +97,12 @@ extension LivePricesView {
                         CoinDetailLoadingView(coin: $selectedCoin)
                     }, label: { EmptyView() })
                 )
+                .sheet(isPresented: $showPortfolioView) {
+                    EditPortfolioView(coin: $selectedCoin)
+                        .environmentObject(vm)
+                        .interactiveDismissDisabled()
+
+                }
         }
     }
         
@@ -110,13 +118,28 @@ extension LivePricesView {
                             segue(coin: coin)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            if !vm.checkPortfolio(coin: coin) {
+                                Button {
+                                    segueEdit(coin: coin)
+                                } label: {
+                                    Label("to Portfolio", systemImage: "plus.square")
+                                }
+                                .tint(.green)
+                            } else {
+                                Button {
+                                    vm.updatePortfolio(coin: coin, amount: 0.0)
+                                } label: {
+                                    Label("from Portfolio", systemImage: "trash.fill")
+                                }
+                                .tint(.red)
+                            }
                             if !vm.checkWatchList(coin: coin) {
                                 Button {
                                     vm.updateWatchList(coin: coin)
                                 } label: {
-                                    Label("to Watchlist", systemImage: "plus.square")
+                                    Label("to Watchlist", systemImage: "star")
                                 }
-                                .tint(.green)
+                                .tint(.orange)
                             } else {
                                 Button {
                                     vm.updateWatchList(coin: coin)
@@ -189,5 +212,10 @@ extension LivePricesView {
     private func segue(coin: CoinModel) {
         selectedCoin = coin
         showDetailView.toggle()
+    }
+    
+    private func segueEdit(coin: CoinModel) {
+        selectedCoin = coin
+        showPortfolioView.toggle()
     }
 }
